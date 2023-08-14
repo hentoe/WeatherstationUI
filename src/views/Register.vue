@@ -78,12 +78,16 @@
       <p class="mt-10 text-center text-sm text-gray-500">
         Already have an account?
         {{ ' ' }}
-        <a href="/login" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-          >Sign in here.</a
+        <RouterLink
+          :to="{ name: 'login' }"
+          class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+          >Sign in here.</RouterLink
         >
       </p>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { RouterLink } from 'vue-router'
+</script>

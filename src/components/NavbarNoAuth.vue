@@ -24,10 +24,10 @@
           </div>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
-              <a
+              <RouterLink
                 v-for="item in navigation"
                 :key="item.name"
-                :href="item.href"
+                :to="{ name: item.router_name }"
                 :class="[
                   item.current
                     ? 'bg-gray-900 text-white'
@@ -35,7 +35,7 @@
                   'rounded-md px-3 py-2 text-sm font-medium'
                 ]"
                 :aria-current="item.current ? 'page' : undefined"
-                >{{ item.name }}</a
+                >{{ item.name }}</RouterLink
               >
             </div>
           </div>
@@ -58,7 +58,7 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 const navigation = [
-  { name: 'Login', href: '/login', current: true },
-  { name: 'Register', href: '/register', current: false }
+  { name: 'Login', router_name: 'login', current: true },
+  { name: 'Register', router_name: 'register', current: false }
 ]
 </script>

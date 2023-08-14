@@ -66,12 +66,16 @@
       <p class="mt-10 text-center text-sm text-gray-500">
         Not a member?
         {{ ' ' }}
-        <a href="/register" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-          >Register here.</a
+        <RouterLink
+          :to="{ name: 'register' }"
+          class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+          >Register here.</RouterLink
         >
       </p>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { RouterLink } from 'vue-router'
+</script>
