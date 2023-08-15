@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '../stores/auth.store'
 import HomeView from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
@@ -9,7 +10,10 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: {
+        requireLogin: true
+      }
     },
     {
       path: '/about',
@@ -30,6 +34,15 @@ const router = createRouter({
       component: Register
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = useAuthStore().isAuthenticated
+  if (to.matched.some((record) => record.meta.requireLogin) && !isAuthenticated) {
+    next({ name: 'login' })
+  } else {
+    next()
+  }
 })
 
 export default router
