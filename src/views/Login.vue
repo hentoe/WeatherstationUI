@@ -13,7 +13,7 @@
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <!-- Form -->
-      <form class="space-y-6" action="#" method="POST">
+      <form class="space-y-6" @submit.prevent="login">
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900"
             >Email address</label
@@ -25,6 +25,7 @@
               type="email"
               autocomplete="email"
               required
+              v-model="email"
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -48,6 +49,7 @@
               type="password"
               autocomplete="current-password"
               required
+              v-model="password"
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -76,6 +78,35 @@
   </div>
 </template>
 
-<script setup>
+<script>
+import { useAuthStore } from '../stores/auth.store'
 import { RouterLink } from 'vue-router'
+import axios from 'axios'
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    async login() {
+      try {
+        const response = await axios.post('/api/user/token/', {
+          email: this.email,
+          password: this.password
+        })
+
+        const token = response.data.token
+
+        useAuthStore().setToken(token)
+
+        this.$router.push('/')
+      } catch (error) {
+        console.error('Login error:', error)
+      }
+    }
+  }
+}
 </script>
