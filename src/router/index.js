@@ -27,6 +27,22 @@ const router = createRouter({
       }
     },
     {
+      path: '/dashboard/locations',
+      name: 'Locations',
+      component: () => import('../views/dashboard/Locations.vue'),
+      meta: {
+        requireLogin: true
+      }
+    },
+    {
+      path: '/dashboard/sensors',
+      name: 'Sensors',
+      component: () => import('../views/dashboard/Sensors.vue'),
+      meta: {
+        requireLogin: true
+      }
+    },
+    {
       path: '/login',
       name: 'login',
       meta: {

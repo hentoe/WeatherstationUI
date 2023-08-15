@@ -149,6 +149,8 @@ import { onMounted } from 'vue'
 
 const navigation = [
   { name: 'Dashboard', href: 'Dashboard' },
+  { name: 'Locations', href: 'Locations' },
+  { name: 'Sensors', href: 'Sensors' },
   { name: 'My Account', href: 'MyAccount' }
 ]
 
