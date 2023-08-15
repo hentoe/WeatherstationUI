@@ -29,12 +29,12 @@
                 :key="item.name"
                 :to="{ name: item.href }"
                 :class="[
-                  item.current
+                  $route.name === item.href
                     ? 'bg-gray-900 text-white'
                     : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                   'rounded-md px-3 py-2 text-sm font-medium'
                 ]"
-                :aria-current="item.current ? 'page' : undefined"
+                :aria-current="$route.name === item.href ? 'page' : undefined"
                 >{{ item.name }}</RouterLink
               >
             </div>
@@ -46,19 +46,11 @@
 </template>
 
 <script setup>
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems
-} from '@headlessui/vue'
+import { Disclosure, DisclosureButton } from '@headlessui/vue'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 const navigation = [
-  { name: 'Login', href: 'login', current: true },
-  { name: 'Register', href: 'register', current: false }
+  { name: 'Login', href: 'login' },
+  { name: 'Register', href: 'register' }
 ]
 </script>
