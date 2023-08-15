@@ -23,10 +23,10 @@
           </div>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
-              <a
+              <RouterLink
                 v-for="item in navigation"
                 :key="item.name"
-                :href="item.href"
+                :to="{ name: item.href }"
                 :class="[
                   item.current
                     ? 'bg-gray-900 text-white'
@@ -34,7 +34,7 @@
                   'rounded-md px-3 py-2 text-sm font-medium'
                 ]"
                 :aria-current="item.current ? 'page' : undefined"
-                >{{ item.name }}</a
+                >{{ item.name }}</RouterLink
               >
             </div>
           </div>
@@ -78,10 +78,10 @@
                 class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               >
                 <MenuItem v-slot="{ active }">
-                  <a
-                    href="#"
+                  <RouterLink
+                    :to="{ name: 'MyAccount' }"
                     :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
-                    >Your Profile</a
+                    >Your Profile</RouterLink
                   >
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
@@ -141,10 +141,10 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { useAuthStore } from '../stores/auth.store'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false }
+  { name: 'Dashboard', href: 'Dashboard', current: true }
+  // { name: 'Team', href: '#', current: false },
+  // { name: 'Projects', href: '#', current: false },
+  // { name: 'Calendar', href: '#', current: false }
 ]
 
 const handleSignOut = () => {

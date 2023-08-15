@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '../stores/auth.store'
-import HomeView from '../views/HomeView.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 
@@ -9,8 +8,16 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'dashboard',
+      name: 'Dashboard',
       component: () => import('../views/dashboard/Dashboard.vue'),
+      meta: {
+        requireLogin: true
+      }
+    },
+    {
+      path: '/dashboard/my-account',
+      name: 'MyAccount',
+      component: () => import('../views/dashboard/MyAccount.vue'),
       meta: {
         requireLogin: true
       }

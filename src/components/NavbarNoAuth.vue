@@ -27,7 +27,7 @@
               <RouterLink
                 v-for="item in navigation"
                 :key="item.name"
-                :to="{ name: item.router_name }"
+                :to="{ name: item.href }"
                 :class="[
                   item.current
                     ? 'bg-gray-900 text-white'
@@ -58,7 +58,7 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 const navigation = [
-  { name: 'Login', router_name: 'login', current: true },
-  { name: 'Register', router_name: 'register', current: false }
+  { name: 'Login', href: 'login', current: true },
+  { name: 'Register', href: 'register', current: false }
 ]
 </script>
