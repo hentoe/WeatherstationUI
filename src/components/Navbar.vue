@@ -78,6 +78,11 @@
               <MenuItems
                 class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               >
+                <MenuItem>
+                  <MenuButton :class="['block px-4 py-2 text-sm text-gray-700']">
+                    {{ userStore.name }}
+                  </MenuButton>
+                </MenuItem>
                 <MenuItem v-slot="{ active }">
                   <RouterLink
                     :to="{ name: 'MyAccount' }"
@@ -139,14 +144,19 @@ import {
 } from '@headlessui/vue'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { useAuthStore } from '../stores/auth.store'
+import { useUserStore } from '../stores/user.store'
+import { onMounted } from 'vue'
 
 const navigation = [
   { name: 'Dashboard', href: 'Dashboard' },
   { name: 'My Account', href: 'MyAccount' }
-  // { name: 'Team', href: '#', current: false },
-  // { name: 'Projects', href: '#', current: false },
-  // { name: 'Calendar', href: '#', current: false }
 ]
+
+const userStore = useUserStore()
+
+onMounted(async () => {
+  await userStore.fetchUserData()
+})
 
 const handleSignOut = () => {
   const authStore = useAuthStore()

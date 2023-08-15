@@ -30,23 +30,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { useUserStore } from '../../stores/user.store'
 
-const userData = ref({
-  name: '',
-  email: ''
-})
-
-onMounted(async () => {
-  try {
-    const response = await axios.get('/api/user/me')
-    userData.value = {
-      name: response.data.name,
-      email: response.data.email
-    }
-  } catch (error) {
-    console.error('Error fetching user data:', error)
-  }
-})
+const userData = useUserStore()
 </script>
