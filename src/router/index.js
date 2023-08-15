@@ -29,11 +29,17 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
+      meta: {
+        requireGuest: true
+      },
       component: Login
     },
     {
       path: '/register',
       name: 'register',
+      meta: {
+        requireGuest: true
+      },
       component: Register
     }
   ]
@@ -41,8 +47,13 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const isAuthenticated = useAuthStore().isAuthenticated
-  if (to.matched.some((record) => record.meta.requireLogin) && !isAuthenticated) {
+  const requireGuest = to.matched.some((record) => record.meta.requireGuest)
+  const requiresAuth = to.matched.some((record) => record.meta.requireLogin)
+
+  if (requiresAuth && !isAuthenticated) {
     next({ name: 'login' })
+  } else if (isAuthenticated && requireGuest) {
+    next('/')
   } else {
     next()
   }
