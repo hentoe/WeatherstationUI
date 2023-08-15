@@ -95,6 +95,7 @@
                   <a
                     href="#"
                     :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
+                    @click="handleSignOut"
                     >Sign out</a
                   >
                 </MenuItem>
@@ -137,6 +138,7 @@ import {
   MenuItems
 } from '@headlessui/vue'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { useAuthStore } from '../stores/auth.store'
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -144,4 +146,9 @@ const navigation = [
   { name: 'Projects', href: '#', current: false },
   { name: 'Calendar', href: '#', current: false }
 ]
+
+const handleSignOut = () => {
+  const authStore = useAuthStore()
+  authStore.clearToken()
+}
 </script>
