@@ -5,22 +5,24 @@
     </div>
   </header>
   <main>
-    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <div class="columns is-multiline">
-        <div class="column is-12">
-          <!-- Add client Button -->
-          <PlusIcon class="h-10 w-10" />
-        </div>
-
-        <div class="column is-3 shadow" v-for="location in locations" v-bind:key="location.id">
-          <div class="box">
-            <h3 class="is-size-4 mb-4 flex items-center">
-              {{ location.name }}
-              <span class="ml-2"><WrenchIcon class="h-6 w-6" /></span>
-            </h3>
+    <div class="mx-auto max-w-xl px-4 py-6 sm:px-6 lg:px-8">
+      <ul role="list" class="divide-y divide-gray-100">
+        <li
+          v-for="location in locations"
+          :key="location.name"
+          class="flex justify-between gap-x-6 py-5"
+        >
+          <div class="flex min-w-0 gap-x-4">
+            <div class="min-w-0 flex-auto">
+              <p class="text-sm font-semibold leading-6 text-gray-900">{{ location.name }}</p>
+              <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ location.id }}</p>
+            </div>
           </div>
-        </div>
-      </div>
+          <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+            <p class="text-sm leading-6 text-gray-900"><WrenchIcon class="h-6 w-6" /></p>
+          </div>
+        </li>
+      </ul>
     </div>
   </main>
 </template>
