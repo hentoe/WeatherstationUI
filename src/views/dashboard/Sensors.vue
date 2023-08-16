@@ -15,7 +15,7 @@
   </div>
 
   <!-- Delete Modal -->
-  <BaseModal :modalActive="modalActive" @close-modal="toggleModal">
+  <BaseModal :modalActive="modalActive" @close-modal="toggleModal" @handle-delete="handleDelete">
     <h1>Hello from Modal.</h1></BaseModal
   >
 </template>
@@ -29,5 +29,10 @@ const modalActive = ref(false)
 
 const toggleModal = () => {
   modalActive.value = !modalActive.value
+}
+
+const handleDelete = () => {
+  console.log('Delete object')
+  toggleModal()
 }
 </script>
