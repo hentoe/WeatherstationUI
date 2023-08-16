@@ -41,7 +41,6 @@
           <div class="flex min-w-0 gap-x-4">
             <div class="min-w-0 flex-auto">
               <p class="text-sm font-semibold leading-6 text-gray-900">{{ location.name }}</p>
-              <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ location.id }}</p>
             </div>
           </div>
           <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
@@ -49,7 +48,7 @@
               <WrenchIcon class="h-6 w-6" />
             </button>
 
-            <button class="cursor-pointer" @click="openModal">
+            <button class="cursor-pointer" @click="toggleModal(location.id)">
               <TrashIcon class="h-6 w-6" />
             </button>
           </div>
@@ -57,87 +56,23 @@
       </ul>
     </div>
   </main>
-
-  <!-- Edit Location Modal -->
-  <template>
-    <TransitionRoot appear :show="isOpen" as="template">
-      <Dialog as="div" @close="closeModal" class="relative z-10">
-        <TransitionChild
-          as="template"
-          enter="duration-300 ease-out"
-          enter-from="opacity-0"
-          enter-to="opacity-100"
-          leave="duration-200 ease-in"
-          leave-from="opacity-100"
-          leave-to="opacity-0"
-        >
-          <div class="fixed inset-0 bg-black bg-opacity-25" />
-        </TransitionChild>
-
-        <div class="fixed inset-0 overflow-y-auto">
-          <div class="flex min-h-full items-center justify-center p-4 text-center">
-            <TransitionChild
-              as="template"
-              enter="duration-300 ease-out"
-              enter-from="opacity-0 scale-95"
-              enter-to="opacity-100 scale-100"
-              leave="duration-200 ease-in"
-              leave-from="opacity-100 scale-100"
-              leave-to="opacity-0 scale-95"
-            >
-              <DialogPanel
-                class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
-              >
-                <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">
-                  Payment successful
-                </DialogTitle>
-                <div class="mt-2">
-                  <p class="text-sm text-gray-500">
-                    Your payment has been successfully submitted. We’ve sent you an email with all
-                    of the details of your order.
-                  </p>
-                </div>
-
-                <div class="mt-4">
-                  <button
-                    type="button"
-                    class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    @click="closeModal"
-                  >
-                    Got it, thanks!
-                  </button>
-                </div>
-              </DialogPanel>
-            </TransitionChild>
-          </div>
-        </div>
-      </Dialog>
-    </TransitionRoot>
-  </template>
+  <DeleteModal
+    :modalActive="modalActive"
+    @close-modal="toggleModal"
+    @handle-delete="handleDelete"
+    modalHeadline="Delete location?"
+    deleteMessage="Are you sure you want to delete this location? This action cannot be undone!"
+  />
 </template>
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import axios from 'axios'
+
 import { PlusIcon, TrashIcon, WrenchIcon } from '@heroicons/vue/24/outline'
+import { Switch } from '@headlessui/vue'
 
-import {
-  Switch,
-  TransitionRoot,
-  TransitionChild,
-  Dialog,
-  DialogPanel,
-  DialogTitle
-} from '@headlessui/vue'
-
-// Modal
-const isOpen = ref(true)
-function closeModal() {
-  isOpen.value = false
-}
-function openModal() {
-  isOpen.value = true
-}
+import DeleteModal from '../../components/Deletemodal.vue'
 
 // API Call
 const locations = ref([])
@@ -161,5 +96,30 @@ const fetchLocations = async (assignedOnly) => {
   } catch (error) {
     console.error('Error fetching locations:', error)
   }
+}
+
+// Delete Modal.
+const modalActive = ref(false)
+const itemId = ref(undefined)
+
+const toggleModal = (locationId) => {
+  modalActive.value = !modalActive.value
+  itemId.value = locationId
+}
+
+const handleDelete = async () => {
+  try {
+    await deleteLocation(itemId.value)
+    toggleModal()
+    window.location.reload()
+  } catch (error) {
+    console.error('Error deleting location:', error)
+  }
+}
+
+const deleteLocation = async (id) => {
+  const apiUrl = `/api/weatherstation/locations/${id}/`
+  console.log(apiUrl)
+  await axios.delete(apiUrl)
 }
 </script>
