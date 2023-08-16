@@ -37,13 +37,15 @@
                     <ExclamationTriangleIcon class="h-6 w-6 text-red-600" aria-hidden="true" />
                   </div>
                   <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                    <DialogTitle as="h3" class="text-base font-semibold leading-6 text-gray-900"
-                      >Delete object</DialogTitle
+                    <DialogTitle
+                      as="h3"
+                      id="modal-headline"
+                      class="text-base font-semibold leading-6 text-gray-900"
+                      >{{ modalHeadline }}</DialogTitle
                     >
                     <div class="mt-2">
                       <p class="text-sm text-gray-500">
-                        Are you sure you want to delete this object? It will be permanently removed.
-                        This action cannot be undone.
+                        {{ deleteMessage }}
                       </p>
                     </div>
                   </div>
@@ -73,23 +75,7 @@
     </Dialog>
   </TransitionRoot>
 </template>
-<!--
 
-    <div
-        v-show="modalActive"
-        class="absolute w-full bg-black bg-opacity-30 h-screen top-0 left-0 flex justify-center px-8"
-      >
-        <div v-if="modalActive" class="p-4 bg-white self-start mt-32 max-w-screen-md">
-          <slot></slot>
-          <button
-            @click="$emit('close-modal')"
-            class="trounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-          >
-            Close
-          </button>
-        </div>
-      </div>
- -->
 <script setup>
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { ExclamationTriangleIcon } from '@heroicons/vue/24/outline'
@@ -98,6 +84,18 @@ defineProps({
   modalActive: {
     type: Boolean,
     default: false
+  },
+  itemId: {
+    type: Number,
+    default: 0
+  },
+  modalHeadline: {
+    type: String,
+    required: true
+  },
+  deleteMessage: {
+    type: String,
+    required: true
   }
 })
 </script>
