@@ -27,7 +27,7 @@
           <span class="text-lg">{{ location.name }}</span>
           <div>
             <button @click="updateLocation(location.id)" class="mr-2">
-              <WrenchIcon class="h-6 w-6" />
+              <PencilSquareIcon class="h-6 w-6" />
             </button>
             <button @click="toggleModal(location.id)">
               <TrashIcon class="h-6 w-6" />
@@ -52,7 +52,7 @@
 import { ref, onMounted, watch } from 'vue'
 import axios from 'axios'
 
-import { PlusIcon, TrashIcon, WrenchIcon } from '@heroicons/vue/24/outline'
+import { PlusIcon, TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { Switch } from '@headlessui/vue'
 
 import DeleteModal from '../../components/DeleteModal.vue'
