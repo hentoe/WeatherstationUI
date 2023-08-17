@@ -29,23 +29,22 @@
             <button @click="updateLocation(location.id)" class="mr-2">
               <PencilSquareIcon class="h-6 w-6" />
             </button>
-            <button @click="toggleModal(location.id)">
+            <button @click="toggleDeleteModal(location.id)">
               <TrashIcon class="h-6 w-6" />
             </button>
           </div>
         </li>
       </ul>
     </div>
-
-    <!-- Delete Modal -->
-    <DeleteModal
-      :modalActive="modalActive"
-      @close-modal="toggleModal"
-      @handle-delete="handleDelete"
-      modalHeadline="Delete location?"
-      deleteMessage="Are you sure you want to delete this location? This action cannot be undone!"
-    />
   </div>
+  <!-- Delete Modal -->
+  <DeleteModal
+    :modalActive="deleteModalActive"
+    @close-modal="toggleDeleteModal"
+    @handle-delete="handleDelete"
+    modalHeadline="Delete location?"
+    deleteMessage="Are you sure you want to delete this location? This action cannot be undone!"
+  />
 </template>
 
 <script setup>
@@ -106,11 +105,11 @@ const addLocation = () => {
 }
 
 // Delete Modal.
-const modalActive = ref(false)
+const deleteModalActive = ref(false)
 const itemId = ref(undefined)
 
-const toggleModal = (locationId) => {
-  modalActive.value = !modalActive.value
+const toggleDeleteModal = (locationId) => {
+  deleteModalActive.value = !deleteModalActive.value
   itemId.value = locationId
 }
 
@@ -119,7 +118,7 @@ const handleDelete = async () => {
     const id = itemId.value
     await deleteLocation(id)
     updateLocationList({ id: id }, 'delete')
-    toggleModal()
+    toggleDeleteModal()
   } catch (error) {
     console.error('Error deleting location:', error)
   }
