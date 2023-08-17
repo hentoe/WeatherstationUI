@@ -83,7 +83,25 @@ const fetchLocations = async (assignedOnly) => {
 
 // Add location.
 const newLocationName = ref('')
-const addLocation = () => {}
+const addLocation = () => {
+  if (newLocationName.value.trim() !== '') {
+    axios
+      .post('/api/weatherstation/locations/', {
+        name: newLocationName.value.trim()
+      })
+      .then((response) => {
+        // Placeholder for Success modal/message.
+        console.log('Success')
+        console.log(response.data)
+      })
+      .catch((error) => {
+        // Placeholder for Fail message.
+        console.log(error.code + ':', error.message)
+      })
+
+    newLocationName.value = ''
+  }
+}
 
 // Delete Modal.
 const modalActive = ref(false)
