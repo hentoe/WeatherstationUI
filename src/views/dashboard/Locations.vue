@@ -7,6 +7,7 @@
   <main>
     <div class="mx-auto max-w-xl px-4 py-6 sm:px-6 lg:px-8">
       <ul role="list" class="divide-y divide-gray-100">
+        <!-- Static row with UI components-->
         <li class="flex justify-between gap-x-6 py-5">
           <div class="flex min-w-0 gap-x-4">
             <div class="min-w-0 flex-auto">
@@ -33,6 +34,7 @@
             </Switch>
           </div>
         </li>
+        <!-- Content -->
         <li
           v-for="location in locations"
           :key="location.name"
@@ -56,6 +58,7 @@
       </ul>
     </div>
   </main>
+  <!-- Modal -->
   <DeleteModal
     :modalActive="modalActive"
     @close-modal="toggleModal"
@@ -72,7 +75,7 @@ import axios from 'axios'
 import { PlusIcon, TrashIcon, WrenchIcon } from '@heroicons/vue/24/outline'
 import { Switch } from '@headlessui/vue'
 
-import DeleteModal from '../../components/Deletemodal.vue'
+import DeleteModal from '../../components/DeleteModal.vue'
 
 // API Call
 const locations = ref([])
