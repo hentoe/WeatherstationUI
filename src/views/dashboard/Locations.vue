@@ -90,6 +90,8 @@ const addLocation = () => {
         name: newLocationName.value.trim()
       })
       .then((response) => {
+        const newLocation = { id: response.data.id, name: response.data.name }
+        updateLocationList(newLocation, 'add')
         // Placeholder for Success modal/message.
         console.log('Success')
         console.log(response.data)
@@ -114,9 +116,10 @@ const toggleModal = (locationId) => {
 
 const handleDelete = async () => {
   try {
-    await deleteLocation(itemId.value)
+    const id = itemId.value
+    await deleteLocation(id)
+    updateLocationList({ id: id }, 'delete')
     toggleModal()
-    window.location.reload()
   } catch (error) {
     console.error('Error deleting location:', error)
   }
@@ -126,5 +129,26 @@ const deleteLocation = async (id) => {
   const apiUrl = `/api/weatherstation/locations/${id}/`
   console.log(apiUrl)
   await axios.delete(apiUrl)
+}
+
+// Update page content
+const updateLocationList = (updatedLocation, action) => {
+  switch (action) {
+    case 'add':
+      locations.value.push({ ...updatedLocation })
+      break
+    case 'update':
+      const existingLocationIndex = locations.value.findIndex(
+        (location) => location.id === updatedLocation.id
+      )
+      if (existingLocationIndex !== -1) {
+        locations.value[existingLocationIndex] = { ...updatedLocation }
+      }
+      break
+    case 'delete':
+      console.log('Delete:', updatedLocation)
+      locations.value = locations.value.filter((location) => location.id !== updatedLocation.id)
+      break
+  }
 }
 </script>
