@@ -26,7 +26,7 @@
         >
           <span class="text-lg">{{ location.name }}</span>
           <div>
-            <button @click="updateLocation(location.id)" class="mr-2">
+            <button @click="openUpdateModal(location)" class="mr-2">
               <PencilSquareIcon class="h-6 w-6" />
             </button>
             <button @click="toggleDeleteModal(location.id)">
@@ -37,6 +37,14 @@
       </ul>
     </div>
   </div>
+  <!-- Update Modal -->
+  <UpdateLocationModal
+    :modalActive="updateModalActive"
+    modalHeadline="Edit location"
+    :location="selectedLocation"
+    @close-modal="closeUpdateModal"
+    @handle-update="handleUpdate"
+  />
   <!-- Delete Modal -->
   <DeleteModal
     :modalActive="deleteModalActive"
@@ -55,6 +63,7 @@ import { PlusIcon, TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/outline
 import { Switch } from '@headlessui/vue'
 
 import DeleteModal from '../../components/DeleteModal.vue'
+import UpdateLocationModal from '../../components/UpdateLocationModal.vue'
 
 // API Call
 const locations = ref([])
@@ -102,6 +111,20 @@ const addLocation = () => {
 
     newLocationName.value = ''
   }
+}
+// Update Modal.
+const updateModalActive = ref(false)
+const selectedLocation = ref(null)
+
+const openUpdateModal = (location) => {
+  selectedLocation.value = location
+  updateModalActive.value = true
+}
+const closeUpdateModal = () => {
+  updateModalActive.value = false
+}
+const handleUpdate = () => {
+  console.log(selectedLocation.value.name)
 }
 
 // Delete Modal.
