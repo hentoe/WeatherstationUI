@@ -163,5 +163,6 @@ onMounted(async () => {
 const handleSignOut = () => {
   const authStore = useAuthStore()
   authStore.clearToken()
+  window.location.reload() // Clears all stores
 }
 </script>
