@@ -10,6 +10,16 @@
         <label class="block text-sm font-medium text-gray-700">Sensor Name</label>
         <input v-model="newSensorName" type="text" class="mt-1 p-2 w-full border rounded-md" />
       </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Description</label>
+        <textarea
+          v-model="newSensorDescription"
+          type="text"
+          class="mt-1 p-2 w-full border rounded-md"
+          placeholder="optional"
+        >
+        </textarea>
+      </div>
 
       <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md">Add Sensor</button>
     </form>
@@ -25,11 +35,16 @@ const router = useRouter()
 
 // Add Sensor
 const newSensorName = ref('')
+// const newSensorType = ref('')
+// const newSensorLocation = ref('')
+const newSensorDescription = ref('')
+
 const addSensor = () => {
   if (newSensorName.value.trim() !== '') {
     axios
       .post('/api/weatherstation/sensors/', {
-        name: newSensorName.value.trim()
+        name: newSensorName.value.trim(),
+        description: newSensorDescription.value.trim()
       })
       .then((response) => {
         router.push({ name: 'Sensors' })
