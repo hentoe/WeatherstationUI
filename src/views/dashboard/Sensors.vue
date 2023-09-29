@@ -66,19 +66,6 @@ onMounted(async () => {
   await sensorStore.fetchSensors()
 })
 
-const fetchSensors = async (assignedOnly) => {
-  try {
-    const apiUrl = `/api/weatherstation/sensors${assignedOnly ? '?assigned_only=1' : ''}`
-    const response = await axios.get(apiUrl)
-    sensors.value = response.data.map((item) => ({
-      id: item.id,
-      name: item.name
-    }))
-  } catch (error) {
-    console.error('Error fetching sensors:', error)
-  }
-}
-
 // Delete Modal.
 const deleteModalActive = ref(false)
 const itemId = ref(undefined)
