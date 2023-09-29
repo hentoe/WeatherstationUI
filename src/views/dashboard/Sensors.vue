@@ -6,12 +6,12 @@
       </div>
     </header>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <!-- Add Sensor Form -->
-      <form>
+      <!-- Add Sensor -->
+      <RouterLink :to="{ name: 'AddSensor' }">
         <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md">
           Add Sensor
         </button>
-      </form>
+      </RouterLink>
 
       <!-- Sensor List -->
       <ul class="mt-6">
