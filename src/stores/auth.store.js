@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore, getActivePinia } from 'pinia'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -26,6 +26,7 @@ export const useAuthStore = defineStore('auth', {
       this.token = ''
       this.isAuthenticated = false
       localStorage.removeItem('token')
+      getActivePinia()._s.forEach((store) => store.$reset())
     }
   }
 })
