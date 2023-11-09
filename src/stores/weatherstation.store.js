@@ -1,9 +1,12 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-export const useSensorStore = defineStore('sensor', {
+export const useWeatherstationStore = defineStore('weatherstation', {
   state: () => ({
-    sensors: []
+    sensors: [],
+    locations: [],
+    sensorTypes: [],
+    measurements: []
   }),
   getters: {
     getAllSensors: (state) => state.sensors

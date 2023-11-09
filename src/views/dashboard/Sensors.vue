@@ -16,7 +16,7 @@
       <!-- Sensor List -->
       <ul class="mt-6">
         <li
-          v-for="sensor in sensorStore.sensors"
+          v-for="sensor in weatherstationStore.sensors"
           :key="sensor.id"
           class="flex items-center justify-between py-2 border-t"
         >
@@ -51,10 +51,10 @@ import axios from 'axios'
 import { PlusIcon, TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/outline'
 
 import DeleteModal from '../../components/DeleteModal.vue'
-import { useSensorStore } from '../../stores/sensor.store'
+import { useWeatherstationStore } from '@/stores/weatherstation.store'
 
 // API Call
-const sensorStore = useSensorStore()
+const weatherstationStore = useWeatherstationStore()
 const sensors = ref([])
 const enabled = ref(false)
 
@@ -63,7 +63,7 @@ watch(enabled, (newValue) => {
 })
 
 onMounted(async () => {
-  await sensorStore.fetchSensors()
+  await weatherstationStore.fetchSensors()
 })
 
 // Delete Modal.
