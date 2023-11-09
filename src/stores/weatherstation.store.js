@@ -23,6 +23,21 @@ export const useWeatherstationStore = defineStore('weatherstation', {
       }
     },
 
+    async updateSensor(sensor) {
+      try {
+        // Todo: update location and sensor_type and remove if not needed
+        const { id, sensor_type, location, ...rest } = sensor
+        console.log('updatedSensor', rest)
+        await axios.put(`/api/weatherstation/sensors/${sensor.id}/`, rest)
+        this.$patch((state) => {
+          const index = state.sensors.findIndex((s) => s.id === sensor.id)
+          state.sensors[index] = sensor
+        })
+      } catch (error) {
+        console.error('Error updating sensor:', error)
+      }
+    },
+
     async deleteSensor(sensorId) {
       try {
         await axios.delete(`/api/weatherstation/sensors/${sensorId}/`)

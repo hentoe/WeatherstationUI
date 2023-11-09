@@ -22,7 +22,7 @@
         >
           <span class="text-lg">{{ sensor.name }}</span>
           <div>
-            <button @click="openUpdateModal(sensor)" class="mr-2">
+            <button @click="toggleUpdateModal(sensor)" class="mr-2">
               <PencilSquareIcon class="h-6 w-6" />
             </button>
             <button @click="toggleDeleteModal(sensor.id)">
@@ -33,6 +33,13 @@
       </ul>
     </div>
   </div>
+  <!-- Update Sensor Modal -->
+  <UpdateSensorModal
+    :modalActive="updateModalActive"
+    :sensor="selectedSensor"
+    @close-modal="closeUpdateModal"
+    modalHeadline="Edit sensor"
+  />
 
   <!-- Delete Modal -->
   <DeleteModal
@@ -47,7 +54,8 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import { TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/outline'
-import DeleteModal from '../../components/DeleteModal.vue'
+import DeleteModal from '@/components/DeleteModal.vue'
+import UpdateSensorModal from '@/components/UpdateSensorModal.vue'
 import { useWeatherstationStore } from '@/stores/weatherstation.store'
 
 const weatherstationStore = useWeatherstationStore()
@@ -60,6 +68,20 @@ watch(enabled, (newValue) => {
 onMounted(async () => {
   await weatherstationStore.fetchSensors()
 })
+
+// Update Modal.
+const updateModalActive = ref(false)
+const selectedSensor = ref(null)
+
+const toggleUpdateModal = (sensor) => {
+  selectedSensor.value = sensor
+  updateModalActive.value = !updateModalActive.value
+}
+
+const closeUpdateModal = () => {
+  updateModalActive.value = false
+  selectedSensor.value = null
+}
 
 // Delete Modal.
 const deleteModalActive = ref(false)
