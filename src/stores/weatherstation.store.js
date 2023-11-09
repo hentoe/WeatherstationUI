@@ -47,6 +47,21 @@ export const useWeatherstationStore = defineStore('weatherstation', {
       } catch (error) {
         console.error('Error deleting sensor:', error)
       }
+    },
+
+    async fetchLocations(assignedOnly) {
+      try {
+        const response = await axios.get(
+          `/api/weatherstation/locations${assignedOnly ? '/?assigned_only=1' : ''}`
+        )
+        const data = response.data
+
+        this.$patch((state) => {
+          state.locations = data
+        })
+      } catch (error) {
+        console.error('Error fetching locations:', error)
+      }
     }
   }
 })

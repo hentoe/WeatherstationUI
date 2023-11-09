@@ -3,6 +3,18 @@
     <header class="bg-white shadow">
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <h1 class="text-3xl font-bold tracking-tight text-gray-900">Locations</h1>
+        <Switch
+          v-model="enabled"
+          :class="enabled ? 'bg-teal-900' : 'bg-teal-700'"
+          class="relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+        >
+          <span class="sr-only">Use setting</span>
+          <span
+            aria-hidden="true"
+            :class="enabled ? 'translate-x-9' : 'translate-x-0'"
+            class="pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out"
+          />
+        </Switch>
       </div>
     </header>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -20,7 +32,7 @@
       <!-- Location List -->
       <ul class="mt-6">
         <li
-          v-for="location in locations"
+          v-for="location in weatherstationStore.locations"
           :key="location.id"
           class="flex items-center justify-between py-2 border-t"
         >
@@ -62,32 +74,25 @@ import axios from 'axios'
 import { PlusIcon, TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { Switch } from '@headlessui/vue'
 
-import DeleteModal from '../../components/DeleteModal.vue'
-import UpdateLocationModal from '../../components/UpdateLocationModal.vue'
+import DeleteModal from '@/components/DeleteModal.vue'
+import UpdateLocationModal from '@/components/UpdateLocationModal.vue'
+
+import { useWeatherstationStore } from '@/stores/weatherstation.store'
+
+const weatherstationStore = useWeatherstationStore()
 
 // API Call
 const locations = ref([])
+
+// For filtering by assigned locations
 const enabled = ref(false)
 watch(enabled, (newValue) => {
-  fetchLocations(newValue)
+  weatherstationStore.fetchLocations(newValue)
 })
 
 onMounted(() => {
-  fetchLocations(enabled.value)
+  weatherstationStore.fetchLocations()
 })
-
-const fetchLocations = async (assignedOnly) => {
-  try {
-    const apiUrl = `/api/weatherstation/locations${assignedOnly ? '?assigned_only=1' : ''}`
-    const response = await axios.get(apiUrl)
-    locations.value = response.data.map((item) => ({
-      id: item.id,
-      name: item.name
-    }))
-  } catch (error) {
-    console.error('Error fetching locations:', error)
-  }
-}
 
 // Add location.
 const newLocationName = ref('')
