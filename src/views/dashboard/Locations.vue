@@ -6,16 +6,30 @@
       </div>
     </header>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <!-- Add Location Form -->
-      <form @submit.prevent="addLocation">
-        <div class="mb-4">
-          <label class="block text-sm font-medium text-gray-700">Location Name</label>
-          <input v-model="newLocationName" type="text" class="mt-1 p-2 w-full border rounded-md" />
-        </div>
-        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md">
-          Add Location
+      <!-- Add New Location Form -->
+      <div class="flex">
+        <input
+          v-model="newLocationName"
+          type="text"
+          class="flex-1 py-3 px-2 rounded-l-md focus:outline-none"
+          placeholder="New Location"
+        />
+        <button class="cursor-pointer bg-black text-white px-4 rounded-r-md flex items-center">
+          <PlusIcon class="h-6 w-6" />
         </button>
-      </form>
+      </div>
+      <!--
+      <form @submit.prevent="addLocation" class="flex items-center">
+        <input
+          v-model="newLocationName"
+          type="text"
+          class="mt-1 p-2 w-full border rounded-l-md"
+          placeholder="New Location"
+        />
+        <button type="submit" class="h-full px-4 py-2 bg-blue-500 text-white rounded-r-md">
+          <PlusIcon class="h-6 w-6" />
+        </button>
+      </form> -->
 
       <!-- Location List -->
       <ul class="mt-6">
@@ -74,7 +88,7 @@
 import { ref, onMounted, watch } from 'vue'
 import axios from 'axios'
 
-import { TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/outline'
+import { PlusIcon, TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { Switch } from '@headlessui/vue'
 
 import DeleteModal from '@/components/DeleteModal.vue'
