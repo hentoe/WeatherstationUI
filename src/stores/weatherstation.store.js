@@ -11,14 +11,7 @@ export const useWeatherstationStore = defineStore('weatherstation', {
   getters: {
     getAllSensors: (state) => state.sensors
   },
-  mutations: {
-    addSensor: (state, newSensor) => {
-      state.sensors.push(newSensor)
-    },
-    removeSensor: (state, sensorId) => {
-      state.sensors = state.sensors.filter((s) => s.id !== sensorId)
-    }
-  },
+
   actions: {
     async fetchSensors() {
       try {
