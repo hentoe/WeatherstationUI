@@ -14,7 +14,10 @@
           class="flex-1 py-3 px-2 rounded-l-md focus:outline-none"
           placeholder="New Location"
         />
-        <button class="cursor-pointer bg-black text-white px-4 rounded-r-md flex items-center">
+        <button
+          @click="addLocation"
+          class="cursor-pointer bg-black text-white px-4 rounded-r-md flex items-center"
+        >
           <PlusIcon class="h-6 w-6" />
         </button>
       </div>
@@ -103,21 +106,10 @@ onMounted(() => {
 const newLocationName = ref('')
 const addLocation = () => {
   if (newLocationName.value.trim() !== '') {
-    axios
-      .post('/api/weatherstation/locations/', {
-        name: newLocationName.value.trim()
-      })
-      .then((response) => {
-        const newLocation = { id: response.data.id, name: response.data.name }
-        updateLocationList(newLocation, 'add')
-        // Placeholder for Success modal/message.
-        console.log('Success')
-        console.log(response.data)
-      })
-      .catch((error) => {
-        // Placeholder for Fail message.
-        console.log(error.code + ':', error.message)
-      })
+    const newLocation = {
+      name: newLocationName.value.trim()
+    }
+    weatherstationStore.addLocation(newLocation)
 
     newLocationName.value = ''
   }

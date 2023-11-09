@@ -62,6 +62,19 @@ export const useWeatherstationStore = defineStore('weatherstation', {
       } catch (error) {
         console.error('Error fetching locations:', error)
       }
+    },
+
+    async addLocation(location) {
+      try {
+        const response = await axios.post('/api/weatherstation/locations/', location)
+        const data = response.data
+
+        this.$patch((state) => {
+          state.locations.push(data)
+        })
+      } catch (error) {
+        console.error('Error adding location:', error)
+      }
     }
   }
 })
