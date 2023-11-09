@@ -141,8 +141,7 @@ const toggleDeleteModal = (locationId) => {
 const handleDelete = async () => {
   try {
     const id = itemId.value
-    await deleteLocation(id)
-    updateLocationList({ id: id }, 'delete')
+    await weatherstationStore.deleteLocation(id)
     toggleDeleteModal()
   } catch (error) {
     console.error('Error deleting location:', error)

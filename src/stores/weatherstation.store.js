@@ -75,6 +75,17 @@ export const useWeatherstationStore = defineStore('weatherstation', {
       } catch (error) {
         console.error('Error adding location:', error)
       }
+    },
+
+    async deleteLocation(locationId) {
+      try {
+        await axios.delete(`/api/weatherstation/locations/${locationId}/`)
+        this.$patch((state) => {
+          state.locations = state.locations.filter((l) => l.id !== locationId)
+        })
+      } catch (error) {
+        console.error('Error deleting location:', error)
+      }
     }
   }
 })
