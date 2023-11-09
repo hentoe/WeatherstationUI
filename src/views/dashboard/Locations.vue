@@ -18,18 +18,6 @@
           <PlusIcon class="h-6 w-6" />
         </button>
       </div>
-      <!--
-      <form @submit.prevent="addLocation" class="flex items-center">
-        <input
-          v-model="newLocationName"
-          type="text"
-          class="mt-1 p-2 w-full border rounded-l-md"
-          placeholder="New Location"
-        />
-        <button type="submit" class="h-full px-4 py-2 bg-blue-500 text-white rounded-r-md">
-          <PlusIcon class="h-6 w-6" />
-        </button>
-      </form> -->
 
       <!-- Location List -->
       <ul class="mt-6">
