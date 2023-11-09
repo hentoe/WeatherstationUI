@@ -147,31 +147,4 @@ const handleDelete = async () => {
     console.error('Error deleting location:', error)
   }
 }
-
-const deleteLocation = async (id) => {
-  const apiUrl = `/api/weatherstation/locations/${id}/`
-  console.log(apiUrl)
-  await axios.delete(apiUrl)
-}
-
-// Update page content
-const updateLocationList = (updatedLocation, action) => {
-  switch (action) {
-    case 'add':
-      locations.value.push({ ...updatedLocation })
-      break
-    case 'update':
-      const existingLocationIndex = locations.value.findIndex(
-        (location) => location.id === updatedLocation.id
-      )
-      if (existingLocationIndex !== -1) {
-        locations.value[existingLocationIndex] = { ...updatedLocation }
-      }
-      break
-    case 'delete':
-      console.log('Delete:', updatedLocation)
-      locations.value = locations.value.filter((location) => location.id !== updatedLocation.id)
-      break
-  }
-}
 </script>
