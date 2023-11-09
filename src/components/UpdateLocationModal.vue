@@ -44,10 +44,10 @@
                       >{{ modalHeadline }}</DialogTitle
                     >
                     <div class="mt-2">
-                      <form>
+                      <form @submit.prevent="$emit('handle-update', localLocation)">
                         <div class="mb-4">
                           <input
-                            v-model="locationName"
+                            v-model="localLocation.name"
                             type="text"
                             id="locationName"
                             name="name"
@@ -63,7 +63,7 @@
                 <button
                   type="button"
                   class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
-                  @click="$emit('handle-update')"
+                  @click="handleUpdate"
                 >
                   Save
                 </button>
@@ -85,28 +85,39 @@
 </template>
 
 <script setup>
+import { ref, watchEffect } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { Cog6ToothIcon } from '@heroicons/vue/24/outline'
-import { onMounted } from 'vue'
-defineEmits(['close-modal', 'handle-update'])
-defineProps({
+import { useWeatherstationStore } from '@/stores/weatherstation.store'
+
+const weatherstationStore = useWeatherstationStore()
+
+const emit = defineEmits(['close-modal', 'handle-update'])
+
+const props = defineProps({
   modalActive: {
     type: Boolean,
     default: false
   },
   location: {
     type: Object,
-    default: null
+    default: () => ({})
   },
   modalHeadline: {
     type: String,
-    required: true
+    default: ''
   }
 })
 
-onMounted(() => {
-  if (location.value) {
-    locationName.value = location.value.name
-  }
+const localLocation = ref({ ...props.location })
+
+// Update local copy on form change
+watchEffect(() => {
+  localLocation.value = { ...props.location }
 })
+
+const handleUpdate = async () => {
+  await weatherstationStore.updateLocation(localLocation.value)
+  emit('close-modal')
+}
 </script>

@@ -77,6 +77,19 @@ export const useWeatherstationStore = defineStore('weatherstation', {
       }
     },
 
+    async updateLocation(location) {
+      try {
+        const { id, ...rest } = location
+        await axios.put(`/api/weatherstation/locations/${location.id}/`, rest)
+        this.$patch((state) => {
+          const index = state.locations.findIndex((l) => l.id === location.id)
+          state.locations[index] = location
+        })
+      } catch (error) {
+        console.error('Error updating location:', error)
+      }
+    },
+
     async deleteLocation(locationId) {
       try {
         await axios.delete(`/api/weatherstation/locations/${locationId}/`)
