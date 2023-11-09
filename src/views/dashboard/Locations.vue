@@ -3,18 +3,6 @@
     <header class="bg-white shadow">
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <h1 class="text-3xl font-bold tracking-tight text-gray-900">Locations</h1>
-        <Switch
-          v-model="enabled"
-          :class="enabled ? 'bg-teal-900' : 'bg-teal-700'"
-          class="relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
-        >
-          <span class="sr-only">Use setting</span>
-          <span
-            aria-hidden="true"
-            :class="enabled ? 'translate-x-9' : 'translate-x-0'"
-            class="pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out"
-          />
-        </Switch>
       </div>
     </header>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -31,6 +19,21 @@
 
       <!-- Location List -->
       <ul class="mt-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2>Show assigned Locations only</h2>
+          <Switch
+            v-model="enabled"
+            :class="enabled ? 'bg-gray-300' : 'bg-gray-500'"
+            class="relative inline-flex h-6 w-10 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+          >
+            <span class="sr-only">Show assigned locations only</span>
+            <span
+              aria-hidden="true"
+              :class="enabled ? 'translate-x-5' : 'translate-x-0'"
+              class="pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out translate-y-0.5"
+            />
+          </Switch>
+        </div>
         <li
           v-for="location in weatherstationStore.locations"
           :key="location.id"
@@ -71,7 +74,7 @@
 import { ref, onMounted, watch } from 'vue'
 import axios from 'axios'
 
-import { PlusIcon, TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/outline'
+import { TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { Switch } from '@headlessui/vue'
 
 import DeleteModal from '@/components/DeleteModal.vue'
