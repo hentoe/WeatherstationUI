@@ -36,7 +36,9 @@ export const useWeatherstationStore = defineStore('weatherstation', {
     async deleteSensor(sensorId) {
       try {
         await axios.delete(`/api/weatherstation/sensors/${sensorId}/`)
-        this.removeSensor(sensorId)
+        this.$patch((state) => {
+          state.sensors = state.sensors.filter((s) => s.id !== sensorId)
+        })
       } catch (error) {
         console.error('Error deleting sensor:', error)
       }

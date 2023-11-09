@@ -46,20 +46,15 @@
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
-import axios from 'axios'
-
-import { PlusIcon, TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/outline'
-
+import { TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/outline'
 import DeleteModal from '../../components/DeleteModal.vue'
 import { useWeatherstationStore } from '@/stores/weatherstation.store'
 
-// API Call
 const weatherstationStore = useWeatherstationStore()
-const sensors = ref([])
 const enabled = ref(false)
 
 watch(enabled, (newValue) => {
-  fetchSensors(newValue)
+  weatherstationStore.fetchSensors(newValue)
 })
 
 onMounted(async () => {
@@ -78,38 +73,10 @@ const toggleDeleteModal = (sensorId) => {
 const handleDelete = async () => {
   try {
     const id = itemId.value
-    await deleteSensor(id)
-    updateSensorList({ id: id }, 'delete')
+    await weatherstationStore.deleteSensor(id)
     toggleDeleteModal()
   } catch (error) {
     console.error('Error deleting sensor:', error)
-  }
-}
-
-const deleteSensor = async (id) => {
-  const apiUrl = `/api/weatherstation/sensors/${id}/`
-  console.log(apiUrl)
-  await axios.delete(apiUrl)
-}
-
-// Update page content
-const updateSensorList = (updatedSensor, action) => {
-  switch (action) {
-    case 'add':
-      sensors.value.push({ ...updatedSensor })
-      break
-    case 'update':
-      const existingSensorIndex = sensors.value.findIndex(
-        (sensor) => sensor.id === updatedSensor.id
-      )
-      if (existingSensorIndex !== -1) {
-        sensors.value[existingSensorIndex] = { ...updatedSensor }
-      }
-      break
-    case 'delete':
-      console.log('Delete:', updatedSensor)
-      sensors.value = sensors.value.filter((sensor) => sensor.id !== updatedSensor.id)
-      break
   }
 }
 </script>
