@@ -31,6 +31,15 @@ export const useWeatherstationStore = defineStore('weatherstation', {
       } catch (error) {
         console.error('Error fetching sensors:', error)
       }
+    },
+
+    async deleteSensor(sensorId) {
+      try {
+        await axios.delete(`/api/weatherstation/sensors/${sensorId}/`)
+        this.removeSensor(sensorId)
+      } catch (error) {
+        console.error('Error deleting sensor:', error)
+      }
     }
   }
 })
