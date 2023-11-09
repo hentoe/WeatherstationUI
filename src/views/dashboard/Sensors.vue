@@ -59,11 +59,6 @@ import UpdateSensorModal from '@/components/UpdateSensorModal.vue'
 import { useWeatherstationStore } from '@/stores/weatherstation.store'
 
 const weatherstationStore = useWeatherstationStore()
-const enabled = ref(false)
-
-watch(enabled, (newValue) => {
-  weatherstationStore.fetchSensors(newValue)
-})
 
 onMounted(async () => {
   await weatherstationStore.fetchSensors()
