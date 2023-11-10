@@ -11,6 +11,25 @@
         <input v-model="newSensorName" type="text" class="mt-1 p-2 w-full border rounded-md" />
       </div>
       <div class="mb-4">
+        <label for="sensorLocation">Location</label>
+        <select
+          v-model="newSensorLocation"
+          id="sensorLocation"
+          name="location"
+          class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300"
+        >
+          <option disabled value="">Please select a location</option>
+          <option
+            v-for="location in weatherstationStore.getAllLocations"
+            :key="location.id"
+            :value="location.id"
+          >
+            {{ location.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="mb-4">
         <label class="block text-sm font-medium text-gray-700">Description</label>
         <textarea
           v-model="newSensorDescription"
@@ -27,7 +46,6 @@
 </template>
 
 <script setup>
-import axios from 'axios'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useWeatherstationStore } from '@/stores/weatherstation.store'
@@ -39,7 +57,7 @@ const router = useRouter()
 // Add Sensor
 const newSensorName = ref('')
 // const newSensorType = ref('')
-// const newSensorLocation = ref('')
+const newSensorLocation = ref('')
 const newSensorDescription = ref('')
 
 const addSensor = async () => {
@@ -47,6 +65,9 @@ const addSensor = async () => {
     const newSensor = {
       name: newSensorName.value.trim(),
       description: newSensorDescription.value.trim()
+    }
+    if (newSensorLocation.value !== '') {
+      newSensor.location = weatherstationStore.getLocationById(newSensorLocation.value)
     }
 
     try {
