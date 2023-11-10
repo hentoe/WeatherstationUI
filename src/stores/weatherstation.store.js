@@ -15,6 +15,19 @@ export const useWeatherstationStore = defineStore('weatherstation', {
   },
 
   actions: {
+    async addSensor(sensor) {
+      try {
+        const response = await axios.post('/api/weatherstation/sensors/', sensor)
+        const data = response.data
+
+        this.$patch((state) => {
+          state.sensors.push(data)
+        })
+      } catch (error) {
+        console.error('Error adding sensor:', error)
+      }
+    },
+
     async fetchSensors() {
       try {
         const response = await axios.get('/api/weatherstation/sensors/')
@@ -47,7 +60,7 @@ export const useWeatherstationStore = defineStore('weatherstation', {
         // Todo: update location and sensor_type and remove if not needed
         const { id, sensor_type, location, ...rest } = sensor
         console.log('updatedSensor', rest)
-        await axios.put(`/api/weatherstation/sensors/${sensor.id}/`, rest)
+        await axios.put(`/api/weatherstation/sensors/${id}/`, rest)
         this.$patch((state) => {
           const index = state.sensors.findIndex((s) => s.id === sensor.id)
           state.sensors[index] = sensor

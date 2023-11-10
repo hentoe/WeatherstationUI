@@ -30,6 +30,9 @@
 import axios from 'axios'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useWeatherstationStore } from '@/stores/weatherstation.store'
+
+const weatherstationStore = useWeatherstationStore()
 
 const router = useRouter()
 
@@ -39,20 +42,19 @@ const newSensorName = ref('')
 // const newSensorLocation = ref('')
 const newSensorDescription = ref('')
 
-const addSensor = () => {
+const addSensor = async () => {
   if (newSensorName.value.trim() !== '') {
-    axios
-      .post('/api/weatherstation/sensors/', {
-        name: newSensorName.value.trim(),
-        description: newSensorDescription.value.trim()
-      })
-      .then((response) => {
-        router.push({ name: 'Sensors' })
-      })
-      .catch((error) => {
-        // Placeholder for Fail message.
-        console.log(error.code + ':', error.message)
-      })
+    const newSensor = {
+      name: newSensorName.value.trim(),
+      description: newSensorDescription.value.trim()
+    }
+
+    try {
+      await weatherstationStore.addSensor(newSensor)
+      router.push({ name: 'Sensors' })
+    } catch (error) {
+      console.error('Error creating new Sensor:', error)
+    }
   }
 }
 </script>
