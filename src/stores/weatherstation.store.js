@@ -23,6 +23,20 @@ export const useWeatherstationStore = defineStore('weatherstation', {
       }
     },
 
+    async fetchSensorDetail(sensorId) {
+      try {
+        const response = await axios.get(`/api/weatherstation/sensors/${sensorId}/`)
+        const data = response.data
+
+        this.$patch((state) => {
+          const index = state.sensors.findIndex((s) => s.id === sensorId)
+          state.sensors[index] = data
+        })
+      } catch (error) {
+        console.error('Error fetching sensor:', error)
+      }
+    },
+
     async updateSensor(sensor) {
       try {
         // Todo: update location and sensor_type and remove if not needed
