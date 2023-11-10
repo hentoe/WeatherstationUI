@@ -22,7 +22,7 @@
         >
           <span class="text-lg">{{ sensor.name }}</span>
           <div>
-            <button @click="toggleUpdateModal(sensor)" class="mr-2">
+            <button @click="openUpdateModal(sensor)" class="mr-2">
               <PencilSquareIcon class="h-6 w-6" />
             </button>
             <button @click="toggleDeleteModal(sensor.id)">
@@ -68,7 +68,7 @@ onMounted(async () => {
 const updateModalActive = ref(false)
 const selectedSensor = ref(null)
 
-const toggleUpdateModal = (sensor) => {
+const openUpdateModal = (sensor) => {
   selectedSensor.value = sensor
   updateModalActive.value = !updateModalActive.value
 }
