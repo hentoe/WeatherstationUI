@@ -52,7 +52,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 import { TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/outline'
 import DeleteModal from '@/components/DeleteModal.vue'
 import UpdateSensorModal from '@/components/UpdateSensorModal.vue'

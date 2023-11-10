@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import { useAuthStore } from './stores/auth.store'
 import axios from 'axios'
 import Navbar from './components/Navbar.vue'

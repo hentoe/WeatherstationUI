@@ -87,9 +87,6 @@ import { useWeatherstationStore } from '@/stores/weatherstation.store'
 
 const weatherstationStore = useWeatherstationStore()
 
-// API Call
-const locations = ref([])
-
 // For filtering by assigned locations
 const enabled = ref(false)
 watch(enabled, (newValue) => {
