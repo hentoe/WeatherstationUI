@@ -8,6 +8,11 @@ export const useWeatherstationStore = defineStore('weatherstation', {
     sensorTypes: [],
     measurements: []
   }),
+  getters: {
+    getSensorById: (state) => (id) => {
+      return state.sensors.find((s) => s.id === id)
+    }
+  },
 
   actions: {
     async fetchSensors() {

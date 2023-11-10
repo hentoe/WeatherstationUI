@@ -68,9 +68,15 @@ onMounted(async () => {
 const updateModalActive = ref(false)
 const selectedSensor = ref(null)
 
-const openUpdateModal = (sensor) => {
-  selectedSensor.value = sensor
-  updateModalActive.value = !updateModalActive.value
+const openUpdateModal = async (sensor) => {
+  try {
+    await weatherstationStore.fetchSensorDetail(sensor.id)
+    const detailedSensor = weatherstationStore.getSensorById(sensor.id)
+    selectedSensor.value = detailedSensor
+    updateModalActive.value = true
+  } catch (error) {
+    console.error('Error fetching sensor details:', error)
+  }
 }
 
 const closeUpdateModal = () => {
