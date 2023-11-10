@@ -131,6 +131,56 @@ export const useWeatherstationStore = defineStore('weatherstation', {
       } catch (error) {
         console.error('Error deleting location:', error)
       }
+    },
+
+    async fetchSensorTypes() {
+      try {
+        const response = await axios.get('/api/weatherstation/sensor-types/')
+        const data = response.data
+
+        this.$patch((state) => {
+          state.sensorTypes = data
+        })
+      } catch (error) {
+        console.error('Error fetching sensor types:', error)
+      }
+    },
+
+    async addSensorType(sensorType) {
+      try {
+        const response = await axios.post('/api/weatherstation/sensor-types/', sensorType)
+        const data = response.data
+
+        this.$patch((state) => {
+          state.sensorTypes.push(data)
+        })
+      } catch (error) {
+        console.error('Error adding sensor type:', error)
+      }
+    },
+
+    async updateSensorType(sensorType) {
+      try {
+        const { id, ...rest } = sensorType
+        await axios.put(`/api/weatherstation/sensor-types/${sensorType.id}/`, rest)
+        this.$patch((state) => {
+          const index = state.sensorTypes.findIndex((st) => st.id === sensorType.id)
+          state.sensorTypes[index] = sensorType
+        })
+      } catch (error) {
+        console.error('Error updating sensor type:', error)
+      }
+    },
+
+    async deleteSensorType(sensorTypeId) {
+      try {
+        await axios.delete(`/api/weatherstation/sensor-types/${sensorTypeId}/`)
+        this.$patch((state) => {
+          state.sensorTypes = state.sensorTypes.filter((st) => st.id !== sensorTypeId)
+        })
+      } catch (error) {
+        console.error('Error deleting sensor type:', error)
+      }
     }
   }
 })
