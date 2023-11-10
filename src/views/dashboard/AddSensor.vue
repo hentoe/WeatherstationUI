@@ -30,6 +30,25 @@
       </div>
 
       <div class="mb-4">
+        <label for="sensorType">Sensor Type</label>
+        <select
+          v-model="newSensorType"
+          id="sensorType"
+          name="sensortype"
+          class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300"
+        >
+          <option disabled value="">Please select a sensor type</option>
+          <option
+            v-for="sType in weatherstationStore.getAllSensorTypes"
+            :key="sType.id"
+            :value="sType.id"
+          >
+            {{ sType.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="mb-4">
         <label class="block text-sm font-medium text-gray-700">Description</label>
         <textarea
           v-model="newSensorDescription"
@@ -56,7 +75,7 @@ const router = useRouter()
 
 // Add Sensor
 const newSensorName = ref('')
-// const newSensorType = ref('')
+const newSensorType = ref('')
 const newSensorLocation = ref('')
 const newSensorDescription = ref('')
 
@@ -68,6 +87,9 @@ const addSensor = async () => {
     }
     if (newSensorLocation.value !== '') {
       newSensor.location = weatherstationStore.getLocationById(newSensorLocation.value)
+    }
+    if (newSensorType.value !== '') {
+      newSensor.sensor_type = weatherstationStore.getSensorTypeById(newSensorType.value)
     }
 
     try {
