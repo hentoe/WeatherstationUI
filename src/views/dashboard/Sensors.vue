@@ -62,6 +62,8 @@ const weatherstationStore = useWeatherstationStore()
 
 onMounted(async () => {
   await weatherstationStore.fetchSensors()
+  await weatherstationStore.fetchSensorTypes()
+  await weatherstationStore.fetchLocations()
 })
 
 // Update Modal.
