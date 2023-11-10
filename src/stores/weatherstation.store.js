@@ -59,7 +59,6 @@ export const useWeatherstationStore = defineStore('weatherstation', {
       try {
         // Todo: update location and sensor_type and remove if not needed
         const { id, sensor_type, location, ...rest } = sensor
-        console.log('updatedSensor', rest)
         await axios.put(`/api/weatherstation/sensors/${id}/`, rest)
         this.$patch((state) => {
           const index = state.sensors.findIndex((s) => s.id === sensor.id)
