@@ -74,11 +74,15 @@ export const useWeatherstationStore = defineStore('weatherstation', {
         // Update rest with location
         if (location) {
           rest.location = this.getLocationById(location)
-          delete rest.location.id
+          if (rest.location) {
+            delete rest.location.id
+          }
         }
         if (sensor_type) {
           rest.sensor_type = this.getSensorTypeById(sensor_type)
-          delete rest.sensor_type.id
+          if (rest.sensor_type) {
+            delete rest.sensor_type.id
+          }
         }
         await axios.put(`/api/weatherstation/sensors/${id}/`, rest)
         this.$patch((state) => {
