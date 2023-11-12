@@ -58,6 +58,25 @@
                         </div>
 
                         <div class="mb-4">
+                          <label for="sensorLocation">Location</label>
+                          <select
+                            v-model="localSensor.location"
+                            id="sensorLocation"
+                            name="location"
+                            class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300"
+                          >
+                            <option disabled value="">Please select a location</option>
+                            <option
+                              v-for="location in weatherstationStore.getAllLocations"
+                              :key="location.id"
+                              :value="location.id"
+                            >
+                              {{ location.name }}
+                            </option>
+                          </select>
+                        </div>
+
+                        <div class="mb-4">
                           <textarea
                             v-model="localSensor.description"
                             type="text"
@@ -131,6 +150,7 @@ watchEffect(() => {
 
 const handleUpdate = async () => {
   await weatherstationStore.updateSensor(localSensor.value)
+  console.log(localSensor.value.location)
   emit('close-modal')
 }
 </script>
