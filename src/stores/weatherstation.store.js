@@ -73,13 +73,13 @@ export const useWeatherstationStore = defineStore('weatherstation', {
         const { id, sensor_type, location, ...rest } = sensor
         // Update rest with location
         if (location) {
-          rest.location = this.getLocationById(location)
+          rest.location = this.getLocationById(location.id)
           if (rest.location) {
             delete rest.location.id
           }
         }
         if (sensor_type) {
-          rest.sensor_type = this.getSensorTypeById(sensor_type)
+          rest.sensor_type = this.getSensorTypeById(sensor_type.id)
           if (rest.sensor_type) {
             delete rest.sensor_type.id
           }

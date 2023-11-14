@@ -45,6 +45,7 @@
                     >
                     <div class="mt-2">
                       <form @submit.prevent="$emit('handle-update', localSensor)">
+                        <!-- Name -->
                         <div class="mb-4">
                           <label for="sensorName">Name</label>
                           <input
@@ -65,17 +66,38 @@
                             name="location"
                             class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300"
                           >
-                            <option disabled value="">Please select a location</option>
+                            <option value="">Please select a location</option>
                             <option
                               v-for="location in weatherstationStore.getAllLocations"
                               :key="location.id"
-                              :value="location.id"
+                              :value="location"
                             >
                               {{ location.name }}
                             </option>
                           </select>
                         </div>
 
+                        <!-- Sensor Type  -->
+                        <div class="mb-4">
+                          <label for="sensorType">Sensor Type</label>
+                          <select
+                            v-model="localSensor.sensor_type"
+                            id="sensorType"
+                            name="sensorType"
+                            class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300"
+                          >
+                            <option disabled value="">Please select a sensor type</option>
+                            <option
+                              v-for="sensorType in weatherstationStore.getAllSensorTypes"
+                              :key="sensorType.id"
+                              :value="sensorType"
+                            >
+                              {{ sensorType.name }} {{ sensorType.unit }}
+                            </option>
+                          </select>
+                        </div>
+
+                        <!-- Description -->
                         <div class="mb-4">
                           <textarea
                             v-model="localSensor.description"
