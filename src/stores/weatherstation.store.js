@@ -149,9 +149,11 @@ export const useWeatherstationStore = defineStore('weatherstation', {
       }
     },
 
-    async fetchSensorTypes() {
+    async fetchSensorTypes(assignedOnly) {
       try {
-        const response = await axios.get('/api/weatherstation/sensor_types/')
+        const response = await axios.get(
+          `/api/weatherstation/sensor_types${assignedOnly ? '/?assigned_only=1' : ''}`
+        )
         const data = response.data
 
         this.$patch((state) => {

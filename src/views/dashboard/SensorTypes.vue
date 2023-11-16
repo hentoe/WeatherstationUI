@@ -12,7 +12,13 @@
           v-model="newSensorTypeName"
           type="text"
           class="flex-1 py-3 px-2 rounded-l-md focus:outline-none"
-          placeholder="New SensorType"
+          placeholder="New Sensor Type Name"
+        />
+        <input
+          v-model="newSensorTypeUnit"
+          type="text"
+          class="flex-1 py-3 px-2 focus:outline-none"
+          placeholder="Unit"
         />
         <button
           @click="addSensorType"
@@ -44,7 +50,7 @@
           :key="sensor_type.id"
           class="flex items-center justify-between py-2 border-t"
         >
-          <span class="text-lg">{{ sensor_type.name }}</span>
+          <span class="text-lg">{{ sensor_type.name }} - {{ sensor_type.unit }}</span>
           <div>
             <button @click="toggleUpdateModal(sensor_type)" class="mr-2">
               <PencilSquareIcon class="h-6 w-6" />
@@ -99,10 +105,12 @@ onMounted(() => {
 
 // Add sensor type.
 const newSensorTypeName = ref('')
+const newSensorTypeUnit = ref('')
 const addSensorType = () => {
   if (newSensorTypeName.value.trim() !== '') {
     const newSensorType = {
-      name: newSensorTypeName.value.trim()
+      name: newSensorTypeName.value.trim(),
+      unit: newSensorTypeUnit.value.trim()
     }
     weatherstationStore.addSensorType(newSensorType)
 
