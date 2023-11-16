@@ -100,7 +100,7 @@ export const useWeatherstationStore = defineStore('weatherstation', {
     async fetchLocations(assignedOnly) {
       try {
         const response = await axios.get(
-          `/api/weatherstation/locations${assignedOnly ? '/?assigned_only=1' : ''}`
+          `/api/weatherstation/locations${assignedOnly ? '/?assigned_only=1' : '/'}`
         )
         const data = response.data
 
@@ -152,7 +152,7 @@ export const useWeatherstationStore = defineStore('weatherstation', {
     async fetchSensorTypes(assignedOnly) {
       try {
         const response = await axios.get(
-          `/api/weatherstation/sensor_types${assignedOnly ? '/?assigned_only=1' : ''}`
+          `/api/weatherstation/sensor_types${assignedOnly ? '/?assigned_only=1' : '/'}`
         )
         const data = response.data
 
