@@ -9,6 +9,9 @@ export const useWeatherstationStore = defineStore('weatherstation', {
     measurements: []
   }),
   getters: {
+    getAllSensors: (state) => {
+      return state.sensors
+    },
     getSensorById: (state) => (id) => {
       return state.sensors.find((s) => s.id === id)
     },
