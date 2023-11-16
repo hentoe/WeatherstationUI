@@ -5,7 +5,7 @@ export const useWeatherstationStore = defineStore('weatherstation', {
   state: () => ({
     sensors: [],
     locations: [],
-    sensorTypes: [],
+    sensor_types: [],
     measurements: []
   }),
   getters: {
@@ -19,10 +19,10 @@ export const useWeatherstationStore = defineStore('weatherstation', {
       return state.locations.find((l) => l.id === id)
     },
     getAllSensorTypes: (state) => {
-      return state.sensorTypes
+      return state.sensor_types
     },
     getSensorTypeById: (state) => (id) => {
-      return state.sensorTypes.find((st) => st.id === id)
+      return state.sensor_types.find((st) => st.id === id)
     }
   },
 
@@ -155,7 +155,7 @@ export const useWeatherstationStore = defineStore('weatherstation', {
         const data = response.data
 
         this.$patch((state) => {
-          state.sensorTypes = data
+          state.sensor_types = data
         })
       } catch (error) {
         console.error('Error fetching sensor types:', error)
@@ -168,7 +168,7 @@ export const useWeatherstationStore = defineStore('weatherstation', {
         const data = response.data
 
         this.$patch((state) => {
-          state.sensorTypes.push(data)
+          state.sensor_types.push(data)
         })
       } catch (error) {
         console.error('Error adding sensor type:', error)
@@ -180,8 +180,8 @@ export const useWeatherstationStore = defineStore('weatherstation', {
         const { id, ...rest } = sensorType
         await axios.put(`/api/weatherstation/sensor_types/${sensorType.id}/`, rest)
         this.$patch((state) => {
-          const index = state.sensorTypes.findIndex((st) => st.id === sensorType.id)
-          state.sensorTypes[index] = sensorType
+          const index = state.sensor_types.findIndex((st) => st.id === sensorType.id)
+          state.sensor_types[index] = sensorType
         })
       } catch (error) {
         console.error('Error updating sensor type:', error)
@@ -192,7 +192,7 @@ export const useWeatherstationStore = defineStore('weatherstation', {
       try {
         await axios.delete(`/api/weatherstation/sensor_types/${sensorTypeId}/`)
         this.$patch((state) => {
-          state.sensorTypes = state.sensorTypes.filter((st) => st.id !== sensorTypeId)
+          state.sensor_types = state.sensor_types.filter((st) => st.id !== sensorTypeId)
         })
       } catch (error) {
         console.error('Error deleting sensor type:', error)

@@ -151,7 +151,7 @@ const navigation = [
   { name: 'Dashboard', href: 'Dashboard' },
   { name: 'Locations', href: 'Locations' },
   { name: 'Sensors', href: 'Sensors' },
-  { name: 'My Account', href: 'MyAccount' }
+  { name: 'Sensor Types', href: 'SensorTypes' }
 ]
 
 const userStore = useUserStore()

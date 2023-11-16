@@ -43,6 +43,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/dashboard/sensor_types',
+      name: 'SensorTypes',
+      component: () => import('../views/dashboard/SensorTypes.vue'),
+      meta: {
+        requireLogin: true
+      }
+    },
+    {
       path: '/dashboard/sensors/add',
       name: 'AddSensor',
       component: () => import('../views/dashboard/AddSensor.vue'),
