@@ -69,22 +69,14 @@ export const useWeatherstationStore = defineStore('weatherstation', {
 
     async updateSensor(sensor) {
       try {
-        // Todo: update location and sensor_type and remove if not needed
-        const { id, sensor_type, location, ...rest } = sensor
-        // Update rest with location
-        if (location) {
-          rest.location = this.getLocationById(location.id)
-          if (rest.location) {
-            delete rest.location.id
-          }
+        // Remove location or sensor type if null
+        if (!sensor.location) {
+          delete sensor.location
         }
-        if (sensor_type) {
-          rest.sensor_type = this.getSensorTypeById(sensor_type.id)
-          if (rest.sensor_type) {
-            delete rest.sensor_type.id
-          }
+        if (!sensor.sensor_type) {
+          delete sensor.sensor_type
         }
-        await axios.put(`/api/weatherstation/sensors/${id}/`, rest)
+        await axios.put(`/api/weatherstation/sensors/${sensor.id}/`, sensor)
         this.$patch((state) => {
           const index = state.sensors.findIndex((s) => s.id === sensor.id)
           state.sensors[index] = sensor

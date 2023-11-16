@@ -66,7 +66,7 @@
                             name="location"
                             class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300"
                           >
-                            <option value="">Please select a location</option>
+                            <option disabled value="">Please select a location</option>
                             <option
                               v-for="location in weatherstationStore.getAllLocations"
                               :key="location.id"
@@ -138,7 +138,7 @@
 </template>
 
 <script setup>
-import { ref, watchEffect } from 'vue'
+import { ref, watch } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { Cog6ToothIcon } from '@heroicons/vue/24/outline'
 import { useWeatherstationStore } from '@/stores/weatherstation.store'
@@ -166,13 +166,16 @@ const props = defineProps({
 const localSensor = ref({ ...props.sensor })
 
 // Update local copy on form change
-watchEffect(() => {
-  localSensor.value = { ...props.sensor }
-})
+watch(
+  () => props.sensor,
+  (newSensor) => {
+    localSensor.value = { ...newSensor }
+  },
+  { immediate: true }
+)
 
 const handleUpdate = async () => {
   await weatherstationStore.updateSensor(localSensor.value)
-  console.log(localSensor.value.location)
   emit('close-modal')
 }
 </script>
