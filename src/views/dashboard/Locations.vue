@@ -75,7 +75,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, watch } from 'vue'
 
 import { PlusIcon, TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { Switch } from '@headlessui/vue'
@@ -91,10 +91,6 @@ const weatherstationStore = useWeatherstationStore()
 const enabled = ref(false)
 watch(enabled, (newValue) => {
   weatherstationStore.fetchLocations(newValue)
-})
-
-onMounted(() => {
-  weatherstationStore.fetchLocations()
 })
 
 // Add location.

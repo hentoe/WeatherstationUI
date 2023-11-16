@@ -81,7 +81,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, watch } from 'vue'
 
 import { PlusIcon, TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { Switch } from '@headlessui/vue'
@@ -97,10 +97,6 @@ const weatherstationStore = useWeatherstationStore()
 const enabled = ref(false)
 watch(enabled, (newValue) => {
   weatherstationStore.fetchSensorTypes(newValue)
-})
-
-onMounted(() => {
-  weatherstationStore.fetchSensorTypes()
 })
 
 // Add sensor type.

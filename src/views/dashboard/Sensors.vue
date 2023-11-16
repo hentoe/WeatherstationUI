@@ -50,19 +50,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/outline'
 import DeleteModal from '@/components/DeleteModal.vue'
 import UpdateSensorModal from '@/components/UpdateSensorModal.vue'
 import { useWeatherstationStore } from '@/stores/weatherstation.store'
 
 const weatherstationStore = useWeatherstationStore()
-
-onMounted(async () => {
-  await weatherstationStore.fetchSensors()
-  await weatherstationStore.fetchSensorTypes()
-  await weatherstationStore.fetchLocations()
-})
 
 // Update Modal.
 const updateModalActive = ref(false)

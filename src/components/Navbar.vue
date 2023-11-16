@@ -133,6 +133,7 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
 import {
   Disclosure,
   DisclosureButton,
@@ -145,7 +146,7 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { useAuthStore } from '../stores/auth.store'
 import { useUserStore } from '../stores/user.store'
-import { onMounted } from 'vue'
+import { useWeatherstationStore } from '../stores/weatherstation.store'
 
 const navigation = [
   { name: 'Dashboard', href: 'Dashboard' },
@@ -155,9 +156,13 @@ const navigation = [
 ]
 
 const userStore = useUserStore()
+const weatherstationStore = useWeatherstationStore()
 
 onMounted(async () => {
   await userStore.fetchUserData()
+  await weatherstationStore.fetchSensors()
+  await weatherstationStore.fetchSensorTypes()
+  await weatherstationStore.fetchLocations()
 })
 
 const handleSignOut = () => {
