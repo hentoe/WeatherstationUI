@@ -53,6 +53,10 @@
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
+          <span v-if="errorMessageActive" class="mt-2 flex items-center text-red-600">
+            <span><ExclamationCircleIcon class="h-5" /></span>
+            <span class="ml-2">Wrong credentials</span>
+          </span>
         </div>
 
         <div>
@@ -76,6 +80,11 @@
       </p>
     </div>
   </div>
+  <ErrorWrongCredentials
+    :modalActive="errorMessageActive"
+    @close-modal="toggleErrorMessage"
+    :errorMessage="errorMessage"
+  />
 </template>
 
 <script>
@@ -83,13 +92,18 @@ import { useAuthStore } from '../stores/auth.store'
 import { RouterLink } from 'vue-router'
 import axios from 'axios'
 
+import { ExclamationCircleIcon } from '@heroicons/vue/24/outline'
+
 export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      errorMessageActive: false,
+      errorMessage: 'Wrong email or password'
     }
   },
+  components: { ExclamationCircleIcon },
   methods: {
     async login() {
       try {
@@ -97,15 +111,19 @@ export default {
           email: this.email,
           password: this.password
         })
-
+        console.log('Status:', response.status)
         const token = response.data.token
 
         useAuthStore().setToken(token)
 
         this.$router.push('/')
       } catch (error) {
-        console.error('Login error:', error)
+        console.error('Login error:', error.message)
+        this.toggleErrorMessage()
       }
+    },
+    toggleErrorMessage() {
+      this.errorMessageActive = !this.errorMessageActive
     }
   }
 }
