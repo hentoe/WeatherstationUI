@@ -73,6 +73,11 @@ const router = createRouter({
         requireGuest: true
       },
       component: Register
+    },
+    {
+      path: '/:catchAll(.*)',
+      name: 'NotFound',
+      component: () => import('../views/NotFoundPage.vue')
     }
   ]
 })
