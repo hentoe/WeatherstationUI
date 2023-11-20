@@ -162,7 +162,7 @@ onMounted(async () => {
   await userStore.fetchUserData()
   await weatherstationStore.fetchSensors()
   await weatherstationStore.fetchSensorTypes()
-  await weatherstationStore.fetchLocations()
+  await weatherstationStore.fetchLocations(true)
 })
 
 const handleSignOut = () => {
