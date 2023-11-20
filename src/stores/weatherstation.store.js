@@ -15,6 +15,12 @@ export const useWeatherstationStore = defineStore('weatherstation', {
     getSensorById: (state) => (id) => {
       return state.sensors.find((s) => s.id === id)
     },
+    getSensorsByLocationId: (state) => (locationId) => {
+      console.log(locationId)
+      return state.sensors.filter((sensor) => {
+        return sensor.location && sensor.location.id === locationId
+      })
+    },
     getAllLocations: (state) => {
       return state.locations
     },
@@ -45,7 +51,7 @@ export const useWeatherstationStore = defineStore('weatherstation', {
 
     async fetchSensors() {
       try {
-        const response = await axios.get('/api/weatherstation/sensors/')
+        const response = await axios.get(`/api/weatherstation/sensors/`)
         const data = response.data
 
         this.$patch((state) => {
