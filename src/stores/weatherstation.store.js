@@ -16,7 +16,6 @@ export const useWeatherstationStore = defineStore('weatherstation', {
       return state.sensors.find((s) => s.id === id)
     },
     getSensorsByLocationId: (state) => (locationId) => {
-      console.log(locationId)
       return state.sensors.filter((sensor) => {
         return sensor.location && sensor.location.id === locationId
       })
@@ -207,6 +206,25 @@ export const useWeatherstationStore = defineStore('weatherstation', {
         })
       } catch (error) {
         console.error('Error deleting sensor type:', error)
+      }
+    },
+
+    async fetchMeasurements(endDate, latest, sensors, startDate) {
+      try {
+        const response = await axios.get('/api/weatherstation/measurements/', {
+          params: {
+            sensors: sensors,
+            start_date: startDate,
+            end_date: endDate,
+            latest: latest
+          }
+        })
+        this.$patch((state) => {
+          state.measurements = response.data
+        })
+        return response.data
+      } catch (error) {
+        console.error('Error fetching measurements:', error)
       }
     }
   }
