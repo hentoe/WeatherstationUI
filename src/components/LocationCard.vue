@@ -7,18 +7,31 @@
     </div>
     <div class="flex flex-col items-center pb-10">
       <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ location.name }}</h5>
-      <span class="text-sm text-gray-500 dark:text-gray-400">30 °C</span>
-      <span class="text-sm text-gray-500 dark:text-gray-400">45 %</span>
-      <span class="text-sm text-gray-500 dark:text-gray-400">998 hPa</span>
+      <!-- Display latest data of sensors in sensorsInLocation -->
+      <span
+        v-for="measurement in measurements"
+        :key="measurement.id"
+        class="text-sm text-gray-500 dark:text-gray-400"
+        >{{ measurement.sensor.sensor_type.name }} {{ measurement.value }}
+        {{ measurement.sensor.sensor_type.unit }}
+      </span>
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { ref, computed, watchEffect, onMounted } from 'vue'
 import { useWeatherstationStore } from '../stores/weatherstation.store'
 
 const weatherstationStore = useWeatherstationStore()
+
+let sensorsInLocation = ref([])
+let measurements = ref([])
+
+// Create a computed property to get the list of sensor IDs
+const sensorIds = computed(() => {
+  return sensorsInLocation.value.map((sensor) => sensor.id)
+})
 
 const props = defineProps({
   location: {
@@ -27,9 +40,13 @@ const props = defineProps({
   }
 })
 
-onMounted(() => {
-  const sensorsInLocation = weatherstationStore.getSensorsByLocationId(props.location.id)
-  console.log('Sensors by Location', props.location.id, 'Sensors: ', sensorsInLocation)
+onMounted(async () => {
+  sensorsInLocation.value = weatherstationStore.getSensorsByLocationId(props.location.id)
+  measurements.value = await weatherstationStore.fetchMeasurements(
+    null,
+    1,
+    sensorIds.value.join(',')
+  )
 })
 </script>
 
