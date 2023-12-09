@@ -2,7 +2,7 @@
 import { RouterView } from 'vue-router'
 import { useAuthStore } from './stores/auth.store'
 import axios from 'axios'
-import Navbar from './components/Navbar.vue'
+import NavbarComponent from './components/NavbarComponent.vue'
 import NavbarNoAuth from './components/NavbarNoAuth.vue'
 
 const authStore = useAuthStore()
@@ -23,7 +23,7 @@ axios.interceptors.request.use(
 
 <template>
   <NavbarNoAuth v-if="!authStore.isAuthenticated" />
-  <Navbar v-else />
+  <NavbarComponent v-else />
 
   <RouterView />
 </template>

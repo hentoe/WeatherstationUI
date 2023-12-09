@@ -12,8 +12,8 @@ const router = createRouter({
     },
     {
       path: '/dashboard',
-      name: 'Dashboard',
-      component: () => import('../views/dashboard/Dashboard.vue'),
+      name: 'DashboardView',
+      component: () => import('../views/dashboard/DashboardView.vue'),
       meta: {
         requireLogin: true
       }
@@ -28,24 +28,24 @@ const router = createRouter({
     },
     {
       path: '/dashboard/locations',
-      name: 'Locations',
-      component: () => import('../views/dashboard/Locations.vue'),
+      name: 'LocationView',
+      component: () => import('../views/dashboard/LocationView.vue'),
       meta: {
         requireLogin: true
       }
     },
     {
       path: '/dashboard/sensors',
-      name: 'Sensors',
-      component: () => import('../views/dashboard/Sensors.vue'),
+      name: 'SensorView',
+      component: () => import('../views/dashboard/SensorView.vue'),
       meta: {
         requireLogin: true
       }
     },
     {
       path: '/dashboard/sensor_types',
-      name: 'SensorTypes',
-      component: () => import('../views/dashboard/SensorTypes.vue'),
+      name: 'SensorTypeView',
+      component: () => import('../views/dashboard/SensorTypeView.vue'),
       meta: {
         requireLogin: true
       }

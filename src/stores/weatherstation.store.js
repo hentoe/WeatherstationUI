@@ -135,8 +135,7 @@ export const useWeatherstationStore = defineStore('weatherstation', {
 
     async updateLocation(location) {
       try {
-        const { id, ...rest } = location
-        await axios.put(`/api/weatherstation/locations/${location.id}/`, rest)
+        await axios.put(`/api/weatherstation/locations/${location.id}/`, location)
         this.$patch((state) => {
           const index = state.locations.findIndex((l) => l.id === location.id)
           state.locations[index] = location
@@ -187,8 +186,7 @@ export const useWeatherstationStore = defineStore('weatherstation', {
 
     async updateSensorType(sensorType) {
       try {
-        const { id, ...rest } = sensorType
-        await axios.put(`/api/weatherstation/sensor_types/${sensorType.id}/`, rest)
+        await axios.put(`/api/weatherstation/sensor_types/${sensorType.id}/`, sensorType)
         this.$patch((state) => {
           const index = state.sensor_types.findIndex((st) => st.id === sensorType.id)
           state.sensor_types[index] = sensorType

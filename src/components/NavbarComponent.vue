@@ -149,10 +149,10 @@ import { useUserStore } from '../stores/user.store'
 import { useWeatherstationStore } from '../stores/weatherstation.store'
 
 const navigation = [
-  { name: 'Dashboard', href: 'Dashboard' },
-  { name: 'Locations', href: 'Locations' },
-  { name: 'Sensors', href: 'Sensors' },
-  { name: 'Sensor Types', href: 'SensorTypes' }
+  { name: 'Dashboard', href: 'DashboardView' },
+  { name: 'Locations', href: 'LocationView' },
+  { name: 'Sensors', href: 'SensorView' },
+  { name: 'Sensor Types', href: 'SensorTypeView' }
 ]
 
 const userStore = useUserStore()

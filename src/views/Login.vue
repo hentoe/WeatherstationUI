@@ -89,7 +89,6 @@
 
 <script>
 import { useAuthStore } from '../stores/auth.store'
-import { RouterLink } from 'vue-router'
 import axios from 'axios'
 
 import { ExclamationCircleIcon } from '@heroicons/vue/24/outline'

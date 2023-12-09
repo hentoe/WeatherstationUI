@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watchEffect, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useWeatherstationStore } from '../stores/weatherstation.store'
 
 const weatherstationStore = useWeatherstationStore()
