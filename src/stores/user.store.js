@@ -15,6 +15,18 @@ export const useUserStore = defineStore('user', {
       } catch (error) {
         console.error('Error fetching user data:', error)
       }
+    },
+    async registerNewUser(newUser) {
+      try {
+        const response = await axios.post('/api/user/create/', newUser)
+        this.name = response.data.name
+        this.email = response.data.email
+        return response
+      } catch (error) {
+        console.error('Error registering new user.')
+        console.log(error.response)
+        return error.response
+      }
     }
   }
 })

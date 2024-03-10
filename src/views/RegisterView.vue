@@ -13,12 +13,13 @@
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <!-- Form -->
-      <form class="space-y-6" action="#" method="POST">
+      <form class="space-y-6" @submit.prevent="register">
         <div>
           <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
           <div class="mt-2">
             <input
               id="name"
+              v-model="newUser.name"
               name="name"
               type="text"
               required
@@ -33,6 +34,7 @@
           <div class="mt-2">
             <input
               id="email"
+              v-model="newUser.email"
               name="email"
               type="email"
               autocomplete="email"
@@ -40,6 +42,10 @@
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
+          <span v-if="errorMessageEmail" class="mt-2 flex items-center text-red-600">
+            <span><ExclamationCircleIcon class="h-5" /></span>
+            <span class="ml-2">{{ errorMessageEmail }}</span>
+          </span>
         </div>
 
         <div>
@@ -51,6 +57,7 @@
           <div class="mt-2">
             <input
               id="password"
+              v-model="newUser.password"
               name="password"
               type="password"
               autocomplete="current-password"
@@ -68,6 +75,7 @@
           <div class="mt-2">
             <input
               id="password2"
+              v-model="newUser.password2"
               name="password2"
               type="password"
               autocomplete="current-password"
@@ -75,6 +83,14 @@
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
+          <span v-if="errorMessage" class="mt-2 flex items-center text-red-600">
+            <span><ExclamationCircleIcon class="h-5" /></span>
+            <span class="ml-2">{{ errorMessage }}</span>
+          </span>
+          <span v-if="errorMessagePassword" class="mt-2 flex items-center text-red-600">
+            <span><ExclamationCircleIcon class="h-5" /></span>
+            <span class="ml-2">{{ errorMessagePassword }}</span>
+          </span>
         </div>
 
         <div>
@@ -101,5 +117,58 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router'
+import { ref } from 'vue'
+import { useRouter, RouterLink } from 'vue-router'
+import { useUserStore } from '@/stores/user.store'
+
+import { ExclamationCircleIcon } from '@heroicons/vue/24/outline'
+
+const errorMessage = ref(null)
+const errorMessageEmail = ref(null)
+const errorMessagePassword = ref(null)
+
+const newUser = ref({
+  name: '',
+  email: '',
+  password: '',
+  password2: ''
+})
+
+const router = useRouter()
+const userStore = useUserStore()
+
+const register = async () => {
+  try {
+    if (newUser.value.password !== newUser.value.password2) {
+      errorMessagePassword.value = 'Passwords do not match!'
+      return
+    }
+
+    // Make API request to register the user
+    const response = await userStore.registerNewUser({
+      name: newUser.value.name,
+      email: newUser.value.email,
+      password: newUser.value.password
+    })
+
+    console.log(response.status)
+    // Check the response from the server
+    if (response.status === 201) {
+      // Handle successful registration (e.g., redirect to login page)
+      router.push({ name: 'login' })
+    } else {
+      console.log(response.data)
+      // Handle registration error
+      if (response.status === 400 && response.data.email) {
+        errorMessageEmail.value = response.data.email[0]
+      }
+      if (response.status === 400 && response.data.password) {
+        errorMessagePassword.value = response.data.password[0]
+      }
+    }
+  } catch (error) {
+    console.error('Error during registration:', error)
+    errorMessage.value = 'An unexpected error occurred'
+  }
+}
 </script>
