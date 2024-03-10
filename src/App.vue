@@ -6,7 +6,7 @@ import NavbarComponent from './components/NavbarComponent.vue'
 import NavbarNoAuth from './components/NavbarNoAuth.vue'
 
 const authStore = useAuthStore()
-authStore.setToken(authStore.token)
+authStore.setToken(authStore.token, authStore.expiry)
 
 axios.interceptors.request.use(
   (config) => {

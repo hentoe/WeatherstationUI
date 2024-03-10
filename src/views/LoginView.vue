@@ -106,14 +106,14 @@ export default {
   methods: {
     async login() {
       try {
-        const response = await axios.post('/api/user/token/', {
+        const response = await axios.post('/api/user/login/', {
           email: this.email,
           password: this.password
         })
-        console.log('Status:', response.status)
         const token = response.data.token
+        const expiry = response.data.expiry
 
-        useAuthStore().setToken(token)
+        useAuthStore().setToken(token, expiry)
 
         this.$router.push('/')
       } catch (error) {
