@@ -167,6 +167,6 @@ onMounted(async () => {
 
 const handleSignOut = () => {
   const authStore = useAuthStore()
-  authStore.clearToken()
+  authStore.logout()
 }
 </script>
