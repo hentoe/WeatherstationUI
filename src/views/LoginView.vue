@@ -55,7 +55,7 @@
           </div>
           <span v-if="errorMessageActive" class="mt-2 flex items-center text-red-600">
             <span><ExclamationCircleIcon class="h-5" /></span>
-            <span class="ml-2">Wrong credentials</span>
+            <span class="ml-2">{{ errorMessage }}</span>
           </span>
         </div>
 
@@ -71,7 +71,6 @@
 
       <p class="mt-10 text-center text-sm text-gray-500">
         Not a member?
-        {{ ' ' }}
         <RouterLink
           :to="{ name: 'register' }"
           class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
@@ -80,11 +79,6 @@
       </p>
     </div>
   </div>
-  <ErrorWrongCredentials
-    :modalActive="errorMessageActive"
-    @close-modal="toggleErrorMessage"
-    :errorMessage="errorMessage"
-  />
 </template>
 
 <script>
@@ -117,6 +111,7 @@ export default {
 
         this.$router.push('/')
       } catch (error) {
+        this.errorMessage = error.response.data.non_field_errors[0]
         this.toggleErrorMessage()
       }
     },
