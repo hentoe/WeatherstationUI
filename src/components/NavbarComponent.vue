@@ -147,6 +147,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { useAuthStore } from '../stores/auth.store'
 import { useUserStore } from '../stores/user.store'
 import { useWeatherstationStore } from '../stores/weatherstation.store'
+import { useRouter } from 'vue-router'
 
 const navigation = [
   { name: 'Dashboard', href: 'DashboardView' },
@@ -154,6 +155,8 @@ const navigation = [
   { name: 'Sensors', href: 'SensorView' },
   { name: 'Sensor Types', href: 'SensorTypeView' }
 ]
+
+const router = useRouter()
 
 const userStore = useUserStore()
 const weatherstationStore = useWeatherstationStore()
@@ -165,8 +168,9 @@ onMounted(async () => {
   await weatherstationStore.fetchLocations(true)
 })
 
-const handleSignOut = () => {
+const handleSignOut = async () => {
   const authStore = useAuthStore()
-  authStore.logout()
+  await authStore.logout()
+  router.push({ name: 'login' })
 }
 </script>
