@@ -68,15 +68,15 @@
         </div>
         <div>
           <div class="flex items-center justify-between">
-            <label for="password2" class="block text-sm font-medium leading-6 text-gray-900"
+            <label for="re_password" class="block text-sm font-medium leading-6 text-gray-900"
               >Confirm Password</label
             >
           </div>
           <div class="mt-2">
             <input
-              id="password2"
-              v-model="newUser.password2"
-              name="password2"
+              id="re_password"
+              v-model="newUser.re_password"
+              name="re_password"
               type="password"
               autocomplete="current-password"
               required
@@ -131,7 +131,7 @@ const newUser = ref({
   name: '',
   email: '',
   password: '',
-  password2: ''
+  re_password: ''
 })
 
 const router = useRouter()
@@ -139,7 +139,7 @@ const userStore = useUserStore()
 
 const register = async () => {
   try {
-    if (newUser.value.password !== newUser.value.password2) {
+    if (newUser.value.password !== newUser.value.re_password) {
       errorMessagePassword.value = 'Passwords do not match!'
       return
     }
@@ -148,14 +148,15 @@ const register = async () => {
     const response = await userStore.registerNewUser({
       name: newUser.value.name,
       email: newUser.value.email,
-      password: newUser.value.password
+      password: newUser.value.password,
+      re_password: newUser.value.re_password
     })
 
     console.log(response.status)
     // Check the response from the server
     if (response.status === 201) {
       // Handle successful registration (e.g., redirect to login page)
-      router.push({ name: 'login' })
+      router.push({ name: 'activation-notice' })
     } else {
       console.log(response.data)
       // Handle registration error

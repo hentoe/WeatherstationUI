@@ -75,6 +75,39 @@ const router = createRouter({
       component: RegisterView
     },
     {
+      path: '/activation-notice',
+      name: 'activation-notice',
+      meta: {
+        requireGuest: true
+      },
+      component: () => import('../views/EmailActivationNotice.vue'),
+      meta: {
+        requireGuest: true
+      }
+    },
+    {
+      path: '/send-activation-email',
+      name: 'resend-activation-email',
+      meta: {
+        requireGuest: true
+      },
+      component: () => import('../views/EmailActivationAgain.vue'),
+      meta: {
+        requireGuest: true
+      }
+    },
+    {
+      path: '/activate',
+      name: 'activate-account',
+      meta: {
+        requireGuest: true
+      },
+      component: () => import('../views/ActivateAccount.vue'),
+      meta: {
+        requireGuest: true
+      }
+    },
+    {
       path: '/:catchAll(.*)',
       name: 'NotFound',
       component: () => import('../views/NotFoundPage.vue')

@@ -54,7 +54,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async logout() {
       try {
-        await axios.post('/api/user/logout/')
+        await axios.post('/api/users/logout/')
         this.clearToken()
       } catch (error) {
         console.error(error)
