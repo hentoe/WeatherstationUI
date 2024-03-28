@@ -7,7 +7,7 @@
         alt="Your Company"
       />
       <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-        Send Activation Email again.
+        Recover your password
       </h2>
     </div>
 
@@ -32,22 +32,48 @@
         </div>
 
         <div>
+          <div>
+            <span v-if="errorMessageActive" class="mt-2 flex items-center text-red-600">
+              <span><ExclamationCircleIcon class="h-5" /></span>
+              <span class="ml-2">{{ errorMessage }}</span>
+            </span>
+          </div>
           <button
             type="submit"
             class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            Send Email
+            Recover password
           </button>
         </div>
       </form>
+
+      <p class="mt-10 text-center text-sm text-gray-500">
+        Already have an account?
+        <RouterLink
+          :to="{ name: 'login' }"
+          class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+          >Sign in here.</RouterLink
+        >
+      </p>
+
+      <p class="text-center text-sm text-gray-500">
+        Not a member?
+        <RouterLink
+          :to="{ name: 'password-reset' }"
+          class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+          >Register here.</RouterLink
+        >
+      </p>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, RouterLink } from 'vue-router'
 import { useUserStore } from '@/stores/user.store'
+
+import { ExclamationCircleIcon } from '@heroicons/vue/24/outline'
 
 const userStore = useUserStore()
 
@@ -55,13 +81,14 @@ const router = useRouter()
 
 const email = ref()
 const errorMessage = ref(null)
+const errorMessageActive = ref(null)
 
 const send_email = async () => {
-  const response = await userStore.resendActivationEmail(email.value)
+  const response = await userStore.recoverPassword(email.value)
 
   if (response.status === 204) {
     // Handle success
-    router.push({ name: 'activation-notice' })
+    router.push({ name: 'password-reset-notice' })
   } else {
     // Handle activation email error
     if (response.status === 400 && response.data.email) {

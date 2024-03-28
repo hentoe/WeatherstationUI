@@ -105,7 +105,6 @@
 
       <p class="mt-10 text-center text-sm text-gray-500">
         Already have an account?
-        {{ ' ' }}
         <RouterLink
           :to="{ name: 'login' }"
           class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
@@ -152,13 +151,11 @@ const register = async () => {
       re_password: newUser.value.re_password
     })
 
-    console.log(response.status)
     // Check the response from the server
     if (response.status === 201) {
       // Handle successful registration (e.g., redirect to login page)
       router.push({ name: 'activation-notice' })
     } else {
-      console.log(response.data)
       // Handle registration error
       if (response.status === 400 && response.data.email) {
         errorMessageEmail.value = response.data.email[0]

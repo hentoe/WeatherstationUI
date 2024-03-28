@@ -23,8 +23,6 @@ export const useUserStore = defineStore('user', {
         this.email = response.data.email
         return response
       } catch (error) {
-        console.error('Error registering new user.')
-        console.log(error.response)
         return error.response
       }
     },
@@ -33,8 +31,14 @@ export const useUserStore = defineStore('user', {
         const response = await axios.post('/api/users/resend_activation/', { email: email })
         return response
       } catch (error) {
-        console.error('Error registering new user.')
-        console.log(error.response)
+        return error.response
+      }
+    },
+    async recoverPassword(email) {
+      try {
+        const response = await axios.post('/api/users/reset_password/', { email: email })
+        return response
+      } catch (error) {
         return error.response
       }
     }

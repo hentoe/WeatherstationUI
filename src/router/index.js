@@ -75,15 +75,36 @@ const router = createRouter({
       component: RegisterView
     },
     {
+      path: '/password/reset',
+      name: 'password-reset',
+      meta: {
+        requireGuest: true
+      },
+      component: () => import('../views/RecoverPassword.vue')
+    },
+    {
+      path: '/password-reset-notice',
+      name: 'password-reset-notice',
+      meta: {
+        requireGuest: true
+      },
+      component: () => import('../views/RecoverPasswordNotice.vue')
+    },
+    {
+      path: '/password/reset/confirm',
+      name: 'password-reset-confirm',
+      meta: {
+        requireGuest: true
+      },
+      component: () => import('../views/RecoverPasswordConfirm.vue')
+    },
+    {
       path: '/activation-notice',
       name: 'activation-notice',
       meta: {
         requireGuest: true
       },
-      component: () => import('../views/EmailActivationNotice.vue'),
-      meta: {
-        requireGuest: true
-      }
+      component: () => import('../views/EmailActivationNotice.vue')
     },
     {
       path: '/send-activation-email',
@@ -91,10 +112,7 @@ const router = createRouter({
       meta: {
         requireGuest: true
       },
-      component: () => import('../views/EmailActivationAgain.vue'),
-      meta: {
-        requireGuest: true
-      }
+      component: () => import('../views/EmailActivationAgain.vue')
     },
     {
       path: '/activate',
@@ -102,10 +120,7 @@ const router = createRouter({
       meta: {
         requireGuest: true
       },
-      component: () => import('../views/ActivateAccount.vue'),
-      meta: {
-        requireGuest: true
-      }
+      component: () => import('../views/ActivateAccount.vue')
     },
     {
       path: '/:catchAll(.*)',

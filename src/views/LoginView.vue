@@ -37,8 +37,10 @@
               >Password</label
             >
             <div class="text-sm">
-              <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500"
-                >Forgot password?</a
+              <RouterLink
+                :to="{ name: 'password-reset' }"
+                class="font-semibold text-indigo-600 hover:text-indigo-500"
+                >Forgot password?</RouterLink
               >
             </div>
           </div>
