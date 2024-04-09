@@ -31,7 +31,6 @@ async function activateAccount() {
     await axios.post('/api/users/activation/', { uid, token })
     activationStatus.value = 'success'
   } catch (error) {
-    console.error('Activation error:', error)
     activationStatus.value = 'error'
   }
 }
