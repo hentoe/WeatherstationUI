@@ -160,7 +160,6 @@ const register = async () => {
       }
     }
   } catch (error) {
-    console.error('Error during registration:', error)
     errorMessage.value = 'An unexpected error occurred'
   }
 }

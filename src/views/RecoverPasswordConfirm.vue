@@ -109,7 +109,6 @@ async function resetPassword() {
     await axios.post('/api/users/reset_password_confirm/', payload.value)
     activationStatus.value = 'success'
   } catch (error) {
-    console.error('Password reset error:', error)
     activationStatus.value = 'error'
     errorMessage.value = error.response?.data?.detail || 'An error occurred.'
     errorMessageActive.value = true
