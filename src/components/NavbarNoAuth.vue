@@ -1,5 +1,5 @@
 <template>
-  <Disclosure as="nav" class="bg-gray-800">
+  <Disclosure as="nav" class="bg-ocean dark:bg-midnight">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
@@ -18,8 +18,8 @@
                 :to="{ name: item.href }"
                 :class="[
                   $route.name === item.href
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    ? 'bg-denim text-white dark:bg-ocean dark:text-ice'
+                    : 'text-ice hover:bg-denim hover:text-white dark:text-ice dark:hover:bg-ocean',
                   'rounded-md px-3 py-2 text-sm font-medium'
                 ]"
                 :aria-current="$route.name === item.href ? 'page' : undefined"
