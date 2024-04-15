@@ -11,13 +11,13 @@
         <input
           v-model="newSensorTypeName"
           type="text"
-          class="flex-1 py-3 px-2 rounded-l-md focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-steel text-midnight dark:text-ice"
+          class="flex-1 py-3 px-2 rounded-l-md focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-ocean text-midnight dark:text-ice dark:placeholder:text-steel"
           placeholder="New Sensor Type Name"
         />
         <input
           v-model="newSensorTypeUnit"
           type="text"
-          class="flex-1 py-3 px-2 focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-steel text-midnight dark:text-ice"
+          class="flex-1 py-3 px-2 focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-ocean text-midnight dark:text-ice dark:placeholder:text-steel"
           placeholder="Unit"
         />
         <button

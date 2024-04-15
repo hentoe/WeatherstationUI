@@ -7,13 +7,11 @@
     </header>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <!-- Add Sensor -->
-      <RouterLink :to="{ name: 'AddSensor' }">
-        <button
-          type="submit"
-          class="px-4 py-2 bg-denim dark:bg-ocean hover:bg-ocean dark:hover:bg-denim text-ice rounded-md"
-        >
-          Add Sensor
-        </button>
+      <RouterLink
+        :to="{ name: 'AddSensor' }"
+        class="px-4 py-2 bg-denim dark:bg-ocean hover:bg-ocean dark:hover:bg-denim text-ice rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-denim"
+      >
+        Add Sensor
       </RouterLink>
 
       <!-- Sensor List -->
