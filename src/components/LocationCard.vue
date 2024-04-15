@@ -1,17 +1,17 @@
 <template>
   <div
-    class="w-full max-w-sm bg-white border border-gray-200 rounded-lg hover:opacity-75 shadow dark:bg-gray-800 dark:border-gray-700 m-4"
+    class="w-full max-w-sm bg-white border border-gray-200 rounded-lg hover:opacity-75 shadow dark:bg-ocean dark:border-none m-4"
   >
     <div class="flex justify-end px-4 pt-4">
       <!-- Upper right corner -->
     </div>
     <div class="flex flex-col items-center pb-10">
-      <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ location.name }}</h5>
+      <h5 class="mb-1 text-xl font-medium text-midnight dark:text-ice">{{ location.name }}</h5>
       <!-- Display latest data of sensors in sensorsInLocation -->
       <span
         v-for="measurement in measurements"
         :key="measurement.id"
-        class="text-sm text-gray-500 dark:text-gray-400"
+        class="text-sm text-gray-500 dark:text-ice"
         >{{ measurement.sensor.sensor_type.name }} {{ measurement.value }}
         {{ measurement.sensor.sensor_type.unit }}
       </span>

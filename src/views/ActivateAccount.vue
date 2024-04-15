@@ -1,10 +1,15 @@
 <template>
-  <main class="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+  <main
+    class="grid min-h-full place-items-center bg-ice dark:bg-midnight px-6 py-24 sm:py-32 lg:px-8"
+  >
     <div class="text-center">
-      <p class="mt-6 text-base leading-7 text-green-300" v-if="activationStatus === 'success'">
+      <p
+        class="mt-6 text-lg leading-7 text-ocean dark:text-ice"
+        v-if="activationStatus === 'success'"
+      >
         Your account has been successfully activated.
       </p>
-      <p class="mt-6 text-base leading-7 text-red-600" v-if="activationStatus === 'error'">
+      <p class="mt-6 text-lg leading-7 text-red-500" v-if="activationStatus === 'error'">
         Failed to activate account. Please try again.
       </p>
     </div>

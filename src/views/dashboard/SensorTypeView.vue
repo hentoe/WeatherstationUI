@@ -1,8 +1,8 @@
 <template>
   <div>
-    <header class="bg-white shadow">
+    <header class="bg-ice dark:bg-midnight shadow">
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900">Sensor Types</h1>
+        <h1 class="text-3xl font-bold tracking-tight text-midnight dark:text-ice">Sensor Types</h1>
       </div>
     </header>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -11,18 +11,18 @@
         <input
           v-model="newSensorTypeName"
           type="text"
-          class="flex-1 py-3 px-2 rounded-l-md focus:outline-none"
+          class="flex-1 py-3 px-2 rounded-l-md focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-ocean text-midnight dark:text-ice dark:placeholder:text-steel"
           placeholder="New Sensor Type Name"
         />
         <input
           v-model="newSensorTypeUnit"
           type="text"
-          class="flex-1 py-3 px-2 focus:outline-none"
+          class="flex-1 py-3 px-2 focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-ocean text-midnight dark:text-ice dark:placeholder:text-steel"
           placeholder="Unit"
         />
         <button
           @click="addSensorType"
-          class="cursor-pointer bg-black text-white px-4 rounded-r-md flex items-center"
+          class="cursor-pointer bg-denim dark:bg-ocean hover:bg-ocean dark:hover:bg-denim text-ice px-4 rounded-r-md flex items-center"
         >
           <PlusIcon class="h-6 w-6" />
         </button>
@@ -31,7 +31,7 @@
       <!-- Sensor Type List -->
       <ul class="mt-6">
         <div class="flex items-center justify-between mb-4">
-          <h2>Show assigned Sensor Types only</h2>
+          <h2 class="text-midnight dark:text-ice">Show assigned Sensor Types only</h2>
           <Switch
             v-model="enabled"
             :class="enabled ? 'bg-gray-300' : 'bg-gray-500'"
@@ -48,15 +48,15 @@
         <li
           v-for="sensor_type in weatherstationStore.sensor_types"
           :key="sensor_type.id"
-          class="flex items-center justify-between py-2 border-t"
+          class="flex items-center justify-between py-2 border-t text-midnight dark:text-ice"
         >
           <span class="text-lg">{{ sensor_type.name }} - {{ sensor_type.unit }}</span>
           <div>
             <button @click="toggleUpdateModal(sensor_type)" class="mr-2">
-              <PencilSquareIcon class="h-6 w-6" />
+              <PencilSquareIcon class="h-6 w-6 text-denim dark:text-steel" />
             </button>
             <button @click="toggleDeleteModal(sensor_type.id)">
-              <TrashIcon class="h-6 w-6" />
+              <TrashIcon class="h-6 w-6 text-denim dark:text-steel" />
             </button>
           </div>
         </li>
