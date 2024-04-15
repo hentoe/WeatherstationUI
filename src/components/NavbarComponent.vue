@@ -69,6 +69,7 @@ c200 -110 334 -292 387 -525 3 -16 8 -78 9 -136 7 -269 -120 -509 -348 -659
           </div>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
+              <!-- Desktop Menu -->
               <RouterLink
                 v-for="item in navigation"
                 :key="item.name"

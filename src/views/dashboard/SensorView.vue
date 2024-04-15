@@ -1,14 +1,19 @@
 <template>
   <div>
-    <header class="bg-white shadow">
+    <header class="bg-ice dark:bg-midnight shadow">
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900">Sensors</h1>
+        <h1 class="text-3xl font-bold tracking-tight text-midnight dark:text-ice">Sensors</h1>
       </div>
     </header>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <!-- Add Sensor -->
       <RouterLink :to="{ name: 'AddSensor' }">
-        <button type="submit" class="px-4 py-2 bg-black text-white rounded-md">Add Sensor</button>
+        <button
+          type="submit"
+          class="px-4 py-2 bg-denim dark:bg-ocean hover:bg-ocean dark:hover:bg-denim text-ice rounded-md"
+        >
+          Add Sensor
+        </button>
       </RouterLink>
 
       <!-- Sensor List -->
@@ -18,13 +23,13 @@
           :key="sensor.id"
           class="flex items-center justify-between py-2 border-t"
         >
-          <span class="text-lg">{{ sensor.name }}</span>
+          <span class="text-lg text-midnight dark:text-ice">{{ sensor.name }}</span>
           <div>
             <button @click="openUpdateModal(sensor)" class="mr-2">
-              <PencilSquareIcon class="h-6 w-6" />
+              <PencilSquareIcon class="h-6 w-6 text-denim dark:text-steel" />
             </button>
             <button @click="toggleDeleteModal(sensor.id)">
-              <TrashIcon class="h-6 w-6" />
+              <TrashIcon class="h-6 w-6 text-denim dark:text-steel" />
             </button>
           </div>
         </li>

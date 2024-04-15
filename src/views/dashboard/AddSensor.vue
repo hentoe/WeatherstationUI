@@ -1,22 +1,26 @@
 <template>
-  <header class="bg-white shadow">
+  <header class="bg-ice dark:bg-midnight shadow">
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Add Sensor</h1>
+      <h1 class="text-3xl font-bold tracking-tight text-midnight dark:text-ice">Add Sensor</h1>
     </div>
   </header>
   <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
     <form @submit.prevent="addSensor">
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Sensor Name</label>
-        <input v-model="newSensorName" type="text" class="mt-1 p-2 w-full border rounded-md" />
+      <div class="mb-4 text-midnight dark:text-ice">
+        <label class="block text-sm font-medium">Sensor Name</label>
+        <input
+          v-model="newSensorName"
+          type="text"
+          class="mt-1 p-2 w-full border rounded-md focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-steel"
+        />
       </div>
-      <div class="mb-4">
+      <div class="mb-4 text-midnight dark:text-ice">
         <label for="sensorLocation">Location</label>
         <select
           v-model="newSensorLocation"
           id="sensorLocation"
           name="location"
-          class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300"
+          class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-steel"
         >
           <option disabled value="">Please select a location</option>
           <option
@@ -29,13 +33,13 @@
         </select>
       </div>
 
-      <div class="mb-4">
+      <div class="mb-4 text-midnight dark:text-ice">
         <label for="sensorType">Sensor Type</label>
         <select
           v-model="newSensorType"
           id="sensorType"
           name="sensortype"
-          class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300"
+          class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-steel"
         >
           <option disabled value="">Please select a sensor type</option>
           <option
@@ -49,17 +53,22 @@
       </div>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Description</label>
+        <label class="block text-sm font-medium text-midnight dark:text-ice">Description</label>
         <textarea
           v-model="newSensorDescription"
           type="text"
-          class="mt-1 p-2 w-full border rounded-md"
+          class="mt-1 p-2 w-full border rounded-md text-midnight dark:text-ice focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-steel"
           placeholder="optional"
         >
         </textarea>
       </div>
 
-      <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md">Add Sensor</button>
+      <button
+        type="submit"
+        class="px-4 py-2 bg-denim dark:bg-ocean hover:bg-ocean dark:hover:bg-denim text-ice rounded-md"
+      >
+        Add Sensor
+      </button>
     </form>
   </div>
 </template>

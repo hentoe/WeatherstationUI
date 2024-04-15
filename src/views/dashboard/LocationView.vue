@@ -1,8 +1,8 @@
 <template>
   <div>
-    <header class="bg-white shadow">
+    <header class="bg-ice dark:bg-midnight shadow">
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900">Locations</h1>
+        <h1 class="text-3xl font-bold tracking-tight text-midnight dark:text-ice">Locations</h1>
       </div>
     </header>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -11,12 +11,12 @@
         <input
           v-model="newLocationName"
           type="text"
-          class="flex-1 py-3 px-2 rounded-l-md focus:outline-none"
+          class="flex-1 py-3 px-2 rounded-l-md focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-steel text-midnight dark:text-ice"
           placeholder="New Location"
         />
         <button
           @click="addLocation"
-          class="cursor-pointer bg-black text-white px-4 rounded-r-md flex items-center"
+          class="cursor-pointer bg-denim dark:bg-ocean hover:bg-ocean dark:hover:bg-denim text-ice px-4 rounded-r-md flex items-center"
         >
           <PlusIcon class="h-6 w-6" />
         </button>
@@ -25,7 +25,7 @@
       <!-- Location List -->
       <ul class="mt-6">
         <div class="flex items-center justify-between mb-4">
-          <h2>Show assigned Locations only</h2>
+          <h2 class="text-midnight dark:text-ice">Show assigned Locations only</h2>
           <Switch
             v-model="enabled"
             :class="enabled ? 'bg-gray-300' : 'bg-gray-500'"
@@ -44,13 +44,13 @@
           :key="location.id"
           class="flex items-center justify-between py-2 border-t"
         >
-          <span class="text-lg">{{ location.name }}</span>
+          <span class="text-lg text-midnight dark:text-ice">{{ location.name }}</span>
           <div>
             <button @click="toggleUpdateModal(location)" class="mr-2">
-              <PencilSquareIcon class="h-6 w-6" />
+              <PencilSquareIcon class="h-6 w-6 text-denim dark:text-steel" />
             </button>
             <button @click="toggleDeleteModal(location.id)">
-              <TrashIcon class="h-6 w-6" />
+              <TrashIcon class="h-6 w-6 text-denim dark:text-steel" />
             </button>
           </div>
         </li>
