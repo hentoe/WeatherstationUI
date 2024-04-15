@@ -93,7 +93,7 @@ c200 -110 334 -292 387 -525 3 -16 8 -78 9 -136 7 -269 -120 -509 -348 -659
           <!-- Bell -->
           <button
             type="button"
-            class="relative rounded-full bg-ocean dark:bg-midnight p-1 text-ice dark:text-steel hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+            class="relative rounded-full bg-ocean dark:bg-midnight p-1 text-ice focus:outline-none focus:ring-2 focus:ring-ice focus:ring-offset-2 focus:ring-offset-ocean hover:outline-none hover:ring-2 hover:ring-white hover:ring-offset-1 hover:ring-offset-ocean"
           >
             <span class="sr-only">View notifications</span>
             <BellIcon class="h-6 w-6" aria-hidden="true" />
@@ -102,14 +102,31 @@ c200 -110 334 -292 387 -525 3 -16 8 -78 9 -136 7 -269 -120 -509 -348 -659
           <!-- Profile dropdown -->
           <Menu as="div" class="relative ml-3">
             <MenuButton
-              class="relative flex rounded-full bg-ocean dark:bg-midnight text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              class="relative flex rounded-full bg-ocean dark:bg-midnight text-sm focus:outline-none focus:ring-2 focus:ring-ice focus:ring-offset-2 focus:ring-offset-ocean hover:outline-none hover:ring-2 hover:ring-white hover:ring-offset-1 hover:ring-offset-ocean"
             >
               <span class="sr-only">Open user menu</span>
               <img
+                v-if="userStore.profilePicture"
                 class="h-8 w-8 rounded-full"
                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 alt="Profile picture"
               />
+              <svg
+                v-if="!userStore.profilePicture"
+                class="h-8 w-8 stroke-ice hover:stroke-ice"
+                data-slot="icon"
+                aria-hidden="true"
+                fill="none"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
             </MenuButton>
             <transition
               enter-active-class="transition ease-out duration-100"
