@@ -16,7 +16,7 @@
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex flex-shrink-0 items-center">
             <svg
-              class="h-8 w-auto"
+              class="h-8 w-auto fill-ice"
               version="1.0"
               xmlns="http://www.w3.org/2000/svg"
               width="700.000000pt"
@@ -24,11 +24,7 @@
               viewBox="0 0 700.000000 700.000000"
               preserveAspectRatio="xMidYMid meet"
             >
-              <g
-                transform="translate(0.000000,700.000000) scale(0.100000,-0.100000)"
-                fill="#ffffff"
-                stroke="none"
-              >
+              <g transform="translate(0.000000,700.000000) scale(0.100000,-0.100000)" stroke="none">
                 <path
                   d="M3375 6035 c-306 -53 -551 -281 -624 -580 -18 -77 -19 -128 -20
 -1229 l-1 -1149 -60 -55 c-212 -191 -358 -480 -387 -767 -31 -303 51 -609 230
