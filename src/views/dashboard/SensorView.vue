@@ -24,10 +24,16 @@
                 ID: <span class="font-semibold">{{ sensor.id }}</span>
               </p>
               <p class="text-sm text-gray-600 dark:text-gray-400">
-                Location: <span class="font-semibold">{{ sensor.location.name }}</span>
+                Location:
+                <span class="font-semibold">{{
+                  sensor.location ? sensor.location.name : '-'
+                }}</span>
               </p>
               <p class="text-sm text-gray-600 dark:text-gray-400">
-                Type: <span class="font-semibold">{{ sensor.sensor_type.name }}</span>
+                Type:
+                <span class="font-semibold">{{
+                  sensor.sensor_type ? sensor.sensor_type.name : '-'
+                }}</span>
               </p>
             </div>
             <div class="flex items-center space-x-2">

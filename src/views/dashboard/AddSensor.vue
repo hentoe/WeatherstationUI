@@ -103,7 +103,7 @@ const addSensor = async () => {
 
     try {
       await weatherstationStore.addSensor(newSensor)
-      router.push({ name: 'Sensors' })
+      router.push({ name: 'SensorView' })
     } catch (error) {
       console.error('Error creating new Sensor:', error)
     }
