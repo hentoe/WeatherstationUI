@@ -15,20 +15,37 @@
       </RouterLink>
 
       <!-- Sensor List -->
-      <ul class="mt-6">
-        <li
-          v-for="sensor in weatherstationStore.sensors"
-          :key="sensor.id"
-          class="flex items-center justify-between py-2 border-t"
-        >
-          <span class="text-lg text-midnight dark:text-ice">{{ sensor.name }}</span>
-          <div>
-            <button @click="openUpdateModal(sensor)" class="mr-2">
-              <PencilSquareIcon class="h-6 w-6 text-denim dark:text-steel" />
-            </button>
-            <button @click="toggleDeleteModal(sensor.id)">
-              <TrashIcon class="h-6 w-6 text-denim dark:text-steel" />
-            </button>
+      <ul class="mt-6 divide-y divide-gray-200 dark:divide-gray-700">
+        <li v-for="sensor in weatherstationStore.sensors" :key="sensor.id" class="py-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-medium text-midnight dark:text-ice">{{ sensor.name }}</h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400">
+                ID: <span class="font-semibold">{{ sensor.id }}</span>
+              </p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">
+                Location: <span class="font-semibold">{{ sensor.location.name }}</span>
+              </p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">
+                Type: <span class="font-semibold">{{ sensor.sensor_type.name }}</span>
+              </p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <button
+                @click="openUpdateModal(sensor)"
+                class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800"
+              >
+                <PencilSquareIcon class="h-6 w-6 text-denim dark:text-steel" aria-hidden="true" />
+                <span class="sr-only">Edit {{ sensor.name }}</span>
+              </button>
+              <button
+                @click="toggleDeleteModal(sensor.id)"
+                class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800"
+              >
+                <TrashIcon class="h-6 w-6 text-denim dark:text-steel" aria-hidden="true" />
+                <span class="sr-only">Delete {{ sensor.name }}</span>
+              </button>
+            </div>
           </div>
         </li>
       </ul>
