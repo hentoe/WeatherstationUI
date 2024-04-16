@@ -50,6 +50,7 @@
                             v-model="localSensorType.name"
                             type="text"
                             id="sensor_typeName"
+                            placeholder="Name"
                             name="name"
                             class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300"
                           />
@@ -60,6 +61,7 @@
                             v-model="localSensorType.unit"
                             type="text"
                             id="sensor_typeUnit"
+                            placeholder="Unit (e.g. °C)"
                             name="unit"
                             class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300"
                           />
