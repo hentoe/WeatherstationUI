@@ -6,27 +6,12 @@
       </div>
     </header>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <!-- Add New SensorType Form -->
-      <div class="flex">
-        <input
-          v-model="newSensorTypeName"
-          type="text"
-          class="flex-1 py-3 px-2 rounded-l-md focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-ocean text-midnight dark:text-ice dark:placeholder:text-steel"
-          placeholder="New Sensor Type Name"
-        />
-        <input
-          v-model="newSensorTypeUnit"
-          type="text"
-          class="flex-1 py-3 px-2 focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-ocean text-midnight dark:text-ice dark:placeholder:text-steel"
-          placeholder="Unit"
-        />
-        <button
-          @click="addSensorType"
-          class="cursor-pointer bg-denim dark:bg-ocean hover:bg-ocean dark:hover:bg-denim text-ice px-4 rounded-r-md flex items-center"
-        >
-          <PlusIcon class="h-6 w-6" />
-        </button>
-      </div>
+      <button
+        @click="toggleCreateModal"
+        class="flex w-full justify-center rounded-md bg-denim px-3 py-1.5 text-sm font-semibold leading-6 text-ice shadow-sm hover:bg-ocean focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-denim"
+      >
+        <PlusIcon class="h-6 w-6" />
+      </button>
 
       <!-- Sensor Type List -->
       <ul class="mt-6">
@@ -63,6 +48,12 @@
       </ul>
     </div>
   </div>
+  <!-- Create Modal -->
+  <AddSensorTypeModal
+    :modalActive="createModalActive"
+    @close-modal="closeCreateModal"
+    modalHeadline="Add sensor type"
+  />
   <!-- Update Modal -->
   <UpdateSensorTypeModal
     :modalActive="updateModalActive"
@@ -90,6 +81,7 @@ import DeleteModal from '@/components/DeleteModal.vue'
 import UpdateSensorTypeModal from '@/components/UpdateSensorTypeModal.vue'
 
 import { useWeatherstationStore } from '@/stores/weatherstation.store'
+import AddSensorTypeModal from '../../components/AddSensorTypeModal.vue'
 
 const weatherstationStore = useWeatherstationStore()
 
@@ -99,20 +91,18 @@ watch(enabled, (newValue) => {
   weatherstationStore.fetchSensorTypes(newValue)
 })
 
-// Add sensor type.
-const newSensorTypeName = ref('')
-const newSensorTypeUnit = ref('')
-const addSensorType = () => {
-  if (newSensorTypeName.value.trim() !== '') {
-    const newSensorType = {
-      name: newSensorTypeName.value.trim(),
-      unit: newSensorTypeUnit.value.trim()
-    }
-    weatherstationStore.addSensorType(newSensorType)
+// Create Modal.
+const createModalActive = ref(false)
 
-    newSensorTypeName.value = ''
-  }
+const toggleCreateModal = () => {
+  createModalActive.value = !createModalActive.value
 }
+
+const closeCreateModal = () => {
+  createModalActive.value = false
+  selectedSensorType.value = null
+}
+
 // Update Modal.
 const updateModalActive = ref(false)
 const selectedSensorType = ref(null)

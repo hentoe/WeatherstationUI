@@ -27,9 +27,9 @@
             leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <DialogPanel
-              class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+              class="relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
             >
-              <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+              <div class="bg-ice dark:bg-midnight px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start">
                   <div
                     class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-yellow-100 sm:mx-0 sm:h-10 sm:w-10"
@@ -40,11 +40,11 @@
                     <DialogTitle
                       as="h3"
                       id="modal-headline"
-                      class="text-base font-semibold leading-6 text-gray-900"
+                      class="text-base font-semibold leading-6 text-midnight dark:text-ice"
                       >{{ modalHeadline }}</DialogTitle
                     >
                     <div class="mt-2">
-                      <form @submit.prevent="$emit('handle-update', localSensorType)">
+                      <form @submit.prevent="$emit('handle-create')">
                         <div class="mb-4">
                           <input
                             v-model="localSensorType.name"
@@ -69,11 +69,11 @@
                   </div>
                 </div>
               </div>
-              <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+              <div class="bg-ice px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                 <button
                   type="button"
                   class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
-                  @click="handleUpdate"
+                  @click="handleCreate"
                 >
                   Save
                 </button>
@@ -102,7 +102,7 @@ import { useWeatherstationStore } from '@/stores/weatherstation.store'
 
 const weatherstationStore = useWeatherstationStore()
 
-const emit = defineEmits(['close-modal', 'handle-update'])
+const emit = defineEmits(['close-modal', 'handle-create'])
 
 const props = defineProps({
   modalActive: {
@@ -119,15 +119,16 @@ const props = defineProps({
   }
 })
 
-const localSensorType = ref({ ...props.sensor_type })
+const localSensorType = ref()
 
 // Update local copy on form change
 watchEffect(() => {
   localSensorType.value = { ...props.sensor_type }
 })
 
-const handleUpdate = async () => {
-  await weatherstationStore.updateSensorType(localSensorType.value)
+const handleCreate = async () => {
+  await weatherstationStore.addSensorType(localSensorType.value)
+  console.log(localSensorType.value)
   emit('close-modal')
 }
 </script>
