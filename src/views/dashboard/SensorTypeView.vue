@@ -8,9 +8,9 @@
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <button
         @click="toggleCreateModal"
-        class="flex w-full justify-center rounded-md bg-denim px-3 py-1.5 text-sm font-semibold leading-6 text-ice shadow-sm hover:bg-ocean focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-denim"
+        class="px-4 py-2 bg-denim dark:bg-ocean hover:bg-ocean dark:hover:bg-denim text-ice rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-denim"
       >
-        <PlusIcon class="h-6 w-6" />
+        Add Sensor Type
       </button>
 
       <!-- Sensor Type List -->
