@@ -159,13 +159,13 @@ c200 -110 334 -292 387 -525 3 -16 8 -78 9 -136 7 -269 -120 -509 -348 -659
                     >
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
-                    <a
-                      href="#"
+                    <RouterLink
+                      :to="{ name: 'Settings' }"
                       :class="[
                         active ? 'bg-steel dark:bg-ocean' : '',
                         'block px-4 py-2 text-sm text-midnight dark:text-ice'
                       ]"
-                      >Settings</a
+                      >Settings</RouterLink
                     >
                   </MenuItem>
                   <MenuItem v-slot="{ active }">

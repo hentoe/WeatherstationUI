@@ -75,6 +75,14 @@ const router = createRouter({
       component: RegisterView
     },
     {
+      path: '/settings',
+      name: 'Settings',
+      meta: {
+        requireLogin: true
+      },
+      component: () => import('../views/SettingsPage.vue')
+    },
+    {
       path: '/password/reset',
       name: 'password-reset',
       meta: {
