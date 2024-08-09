@@ -143,20 +143,10 @@ c200 -110 334 -292 387 -525 3 -16 8 -78 9 -136 7 -269 -120 -509 -348 -659
                 <MenuItems
                   class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-ice dark:bg-midnight py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 >
-                  <MenuItem>
-                    <MenuButton :class="['block px-4 py-2 text-sm text-midnight dark:text-ice']">
+                  <MenuItem disabled>
+                    <span class="block px-4 py-2 text-sm text-midnight dark:text-ice">
                       {{ userStore.name }}
-                    </MenuButton>
-                  </MenuItem>
-                  <MenuItem v-slot="{ active }">
-                    <RouterLink
-                      :to="{ name: 'MyAccount' }"
-                      :class="[
-                        active ? 'bg-steel dark:bg-ocean' : '',
-                        'block px-4 py-2 text-sm text-midnight dark:text-ice'
-                      ]"
-                      >Your Profile</RouterLink
-                    >
+                    </span>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
                     <RouterLink

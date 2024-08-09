@@ -19,14 +19,6 @@ const router = createRouter({
       }
     },
     {
-      path: '/dashboard/my-account',
-      name: 'MyAccount',
-      component: () => import('../views/dashboard/MyAccount.vue'),
-      meta: {
-        requireLogin: true
-      }
-    },
-    {
       path: '/dashboard/locations',
       name: 'LocationView',
       component: () => import('../views/dashboard/LocationView.vue'),
