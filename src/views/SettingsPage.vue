@@ -44,24 +44,13 @@
 </template>
 
 <script setup>
-import {
-  BellIcon,
-  CreditCardIcon,
-  CubeIcon,
-  FingerPrintIcon,
-  UserCircleIcon,
-  UsersIcon
-} from '@heroicons/vue/24/outline'
+import { FingerPrintIcon, UserCircleIcon } from '@heroicons/vue/24/outline'
 
 import SettingsProfile from '../components/SettingsProfile.vue'
 import SettingsLanguage from '../components/SettingsLanguage.vue'
 
 const secondaryNavigation = [
   { name: 'General', href: '#', icon: UserCircleIcon, current: true },
-  { name: 'Security', href: '#', icon: FingerPrintIcon, current: false },
-  { name: 'Notifications', href: '#', icon: BellIcon, current: false },
-  { name: 'Plan', href: '#', icon: CubeIcon, current: false },
-  { name: 'Billing', href: '#', icon: CreditCardIcon, current: false },
-  { name: 'Team members', href: '#', icon: UsersIcon, current: false }
+  { name: 'Security', href: '#', icon: FingerPrintIcon, current: false }
 ]
 </script>
