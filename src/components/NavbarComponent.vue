@@ -141,7 +141,7 @@ c200 -110 334 -292 387 -525 3 -16 8 -78 9 -136 7 -269 -120 -509 -348 -659
                 leave-to-class="transform opacity-0 scale-95"
               >
                 <MenuItems
-                  class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-ice dark:bg-midnight py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-ice dark:bg-ocean py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 >
                   <MenuItem disabled>
                     <span class="block px-4 py-2 text-sm text-midnight dark:text-ice">
@@ -152,7 +152,7 @@ c200 -110 334 -292 387 -525 3 -16 8 -78 9 -136 7 -269 -120 -509 -348 -659
                     <RouterLink
                       :to="{ name: 'Settings' }"
                       :class="[
-                        active ? 'bg-steel dark:bg-ocean' : '',
+                        active ? 'bg-steel dark:bg-denim' : '',
                         'block px-4 py-2 text-sm text-midnight dark:text-ice'
                       ]"
                       >Settings</RouterLink
@@ -162,7 +162,7 @@ c200 -110 334 -292 387 -525 3 -16 8 -78 9 -136 7 -269 -120 -509 -348 -659
                     <a
                       href="#"
                       :class="[
-                        active ? 'bg-steel dark:bg-ocean' : '',
+                        active ? 'bg-steel dark:bg-ocean dark:hover:bg-denim' : '',
                         'block px-4 py-2 text-sm text-midnight dark:text-ice'
                       ]"
                       @click="handleSignOut"
