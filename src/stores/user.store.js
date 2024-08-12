@@ -16,6 +16,15 @@ export const useUserStore = defineStore('user', {
         console.error('Error fetching user data:', error)
       }
     },
+    async updateUserName(newName) {
+      try {
+        const response = await axios.patch('/api/users/me/', { name: newName })
+        this.name = response.data.name
+        return response
+      } catch (error) {
+        return error.response
+      }
+    },
     async registerNewUser(newUser) {
       try {
         const response = await axios.post('/api/users/', newUser)

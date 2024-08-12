@@ -11,12 +11,40 @@
           Full name
         </dt>
         <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
-          <div class="text-midnight dark:text-ice">{{ userData.name }}</div>
+          <div v-if="!showUpdateUser" class="text-midnight dark:text-ice">
+            {{ userData.name }}
+          </div>
+          <div v-if="showUpdateUser" class="text-midnight dark:text-ice">
+            <input
+              v-model="newName"
+              :placeholder="userData.name"
+              type="text"
+              class="rounded-md bg-ice dark:bg-ocean text-midnight dark:text-ice dark:placeholder:text-stell"
+            />
+          </div>
           <button
             type="button"
             class="font-semibold text-denim dark:text-steel hover:text-ocean dark:hover:text-ice"
+            @click="toggleUpdateUser"
+            v-if="!showUpdateUser"
           >
             Update
+          </button>
+          <button
+            type="button"
+            class="font-semibold text-denim dark:text-steel hover:text-ocean dark:hover:text-ice"
+            @click="updateUser"
+            v-if="showUpdateUser"
+          >
+            Save
+          </button>
+          <button
+            type="button"
+            class="font-semibold text-denim dark:text-steel hover:text-ocean dark:hover:text-ice"
+            @click="toggleUpdateUser"
+            v-if="showUpdateUser"
+          >
+            Cancel
           </button>
         </dd>
       </div>
@@ -39,6 +67,20 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { useUserStore } from '../stores/user.store'
 const userData = useUserStore()
+
+const newName = ref(userData.name)
+const showUpdateUser = ref(false)
+
+const toggleUpdateUser = () => {
+  console.log('Toggle update user', showUpdateUser.value)
+  showUpdateUser.value = !showUpdateUser.value
+}
+const updateUser = () => {
+  console.log('Update user', newName.value)
+  userData.updateUserName(newName.value)
+  showUpdateUser.value = false
+}
 </script>
