@@ -9,6 +9,7 @@
         <ul role="list" class="flex gap-x-3 gap-y-1 whitespace-nowrap lg:flex-col">
           <li v-for="item in secondaryNavigation" :key="item.name">
             <a
+              @click.prevent="setCurrentSection(item.name)"
               :href="item.href"
               :class="[
                 item.current
@@ -36,21 +37,33 @@
 
     <main class="px-4 py-16 sm:px-6 lg:flex-auto lg:px-0 lg:py-20">
       <div class="mx-auto max-w-2xl space-y-16 sm:space-y-20 lg:mx-0 lg:max-w-none">
-        <SettingsProfile />
-        <SettingsLanguage />
+        <SettingsProfile v-if="currentSection === 'General'" />
+        <SettingsLanguage v-if="currentSection === 'General'" />
+        <SettingsSecurity v-if="currentSection === 'Security'" />
       </div>
     </main>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { FingerPrintIcon, UserCircleIcon } from '@heroicons/vue/24/outline'
 
 import SettingsProfile from '../components/SettingsProfile.vue'
 import SettingsLanguage from '../components/SettingsLanguage.vue'
+import SettingsSecurity from '../components/SettingsSecurity.vue'
+
+const currentSection = ref('General')
 
 const secondaryNavigation = [
   { name: 'General', href: '#', icon: UserCircleIcon, current: true },
   { name: 'Security', href: '#', icon: FingerPrintIcon, current: false }
 ]
+
+function setCurrentSection(section) {
+  currentSection.value = section
+  secondaryNavigation.forEach((item) => {
+    item.current = item.name === section
+  })
+}
 </script>
