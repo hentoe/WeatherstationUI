@@ -8,11 +8,10 @@
       <nav class="flex-none px-4 sm:px-6 lg:px-0">
         <ul role="list" class="flex gap-x-3 gap-y-1 whitespace-nowrap lg:flex-col">
           <li v-for="item in secondaryNavigation" :key="item.name">
-            <a
-              @click.prevent="setCurrentSection(item.name)"
-              :href="item.href"
+            <router-link
+              :to="item.href"
               :class="[
-                item.current
+                isCurrent(item.name)
                   ? 'bg-ice dark:bg-ocean text-denim dark:text-ice'
                   : 'text-midnight dark:text-steel hover:bg-ice dark:hover:bg-ocean hover:text-denim dark:hover:text-ice',
                 'group flex gap-x-3 rounded-md py-2 pl-2 pr-3 text-sm font-semibold leading-6'
@@ -21,7 +20,7 @@
               <component
                 :is="item.icon"
                 :class="[
-                  item.current
+                  isCurrent(item.name)
                     ? 'text-denim dark:text-ice'
                     : 'text-gray-400 dark:text-steel group-hover:text-denim dark:group-hover:text-ice',
                   'h-6 w-6 shrink-0'
@@ -29,7 +28,7 @@
                 aria-hidden="true"
               />
               {{ item.name }}
-            </a>
+            </router-link>
           </li>
         </ul>
       </nav>
@@ -37,33 +36,25 @@
 
     <main class="px-4 py-16 sm:px-6 lg:flex-auto lg:px-0 lg:py-20">
       <div class="mx-auto max-w-2xl space-y-16 sm:space-y-20 lg:mx-0 lg:max-w-none">
-        <SettingsProfile v-if="currentSection === 'General'" />
-        <SettingsLanguage v-if="currentSection === 'General'" />
-        <SettingsSecurity v-if="currentSection === 'Security'" />
+        <router-view />
       </div>
     </main>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { FingerPrintIcon, UserCircleIcon } from '@heroicons/vue/24/outline'
 
-import SettingsProfile from '../components/SettingsProfile.vue'
-import SettingsLanguage from '../components/SettingsLanguage.vue'
-import SettingsSecurity from '../components/SettingsSecurity.vue'
-
-const currentSection = ref('General')
+const route = useRoute()
 
 const secondaryNavigation = [
-  { name: 'General', href: '#', icon: UserCircleIcon, current: true },
-  { name: 'Security', href: '#', icon: FingerPrintIcon, current: false }
+  { name: 'General', href: '/settings/general', icon: UserCircleIcon },
+  { name: 'Security', href: '/settings/security', icon: FingerPrintIcon }
 ]
 
-function setCurrentSection(section) {
-  currentSection.value = section
-  secondaryNavigation.forEach((item) => {
-    item.current = item.name === section
-  })
+function isCurrent(section) {
+  return route.path.includes(section.toLowerCase())
 }
 </script>

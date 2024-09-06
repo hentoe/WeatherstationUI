@@ -68,11 +68,23 @@ const router = createRouter({
     },
     {
       path: '/settings',
-      name: 'Settings',
-      meta: {
-        requireLogin: true
-      },
-      component: () => import('../views/SettingsPage.vue')
+      component: () => import('../views/SettingsPage.vue'),
+      children: [
+        {
+          path: '',
+          redirect: 'settings/general'
+        },
+        {
+          path: 'general',
+          name: 'GeneralSettings',
+          component: () => import('@/components/SettingsGeneral.vue')
+        },
+        {
+          path: 'security',
+          name: 'SecuritySettings',
+          component: () => import('@/components/SettingsSecurity.vue')
+        }
+      ]
     },
     {
       path: '/password/reset',

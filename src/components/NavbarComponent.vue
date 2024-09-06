@@ -150,7 +150,7 @@ c200 -110 334 -292 387 -525 3 -16 8 -78 9 -136 7 -269 -120 -509 -348 -659
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
                     <RouterLink
-                      :to="{ name: 'Settings' }"
+                      :to="{ name: 'GeneralSettings' }"
                       :class="[
                         active ? 'bg-steel dark:bg-denim' : '',
                         'block px-4 py-2 text-sm text-midnight dark:text-ice'
