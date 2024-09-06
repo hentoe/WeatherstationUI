@@ -12,6 +12,7 @@
               :to="item.href"
               :class="[
                 isCurrent(item.name)
+
                   ? 'bg-ice dark:bg-ocean text-denim dark:text-ice'
                   : 'text-midnight dark:text-steel hover:bg-ice dark:hover:bg-ocean hover:text-denim dark:hover:text-ice',
                 'group flex gap-x-3 rounded-md py-2 pl-2 pr-3 text-sm font-semibold leading-6'
