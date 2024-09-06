@@ -52,12 +52,24 @@ export const useAuthStore = defineStore('auth', {
 
       return false
     },
+    async setPassword(current_password, new_password, re_new_password) {
+      try {
+        await axios.post('/api/users/set_password/', {
+          new_password: new_password,
+          re_new_password: re_new_password,
+          current_password: current_password
+        })
+      } catch (error) {
+        // console.log('Store:', error.response)
+        throw error
+      }
+    },
     async logout() {
       try {
         await axios.post('/api/users/logout/')
         this.clearToken()
       } catch (error) {
-        console.error(error)
+        return error.response
       }
     }
   }
