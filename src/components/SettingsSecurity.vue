@@ -183,10 +183,10 @@ const toggleUpdatePassword = () => {
 const updatePassword = async () => {
   error.value = {}
 
-  //if (newPassword.value !== reNewPassword.value) {
-  //  error.value.re_new_password = 'New passwords do not match.'
-  //  return
-  //}
+  if (newPassword.value !== reNewPassword.value) {
+    error.value.re_new_password = ['New passwords do not match.']
+    return
+  }
 
   try {
     await authStore.setPassword(currentPassword.value, newPassword.value, reNewPassword.value)
