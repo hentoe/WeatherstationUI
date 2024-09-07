@@ -52,6 +52,17 @@ export const useAuthStore = defineStore('auth', {
 
       return false
     },
+    async getApiKey(email, password) {
+      try {
+        const response = await axios.post('/api/users/token/', {
+          email: email,
+          password: password
+        })
+        return response
+      } catch (error) {
+        throw error
+      }
+    },
     async setPassword(current_password, new_password, re_new_password) {
       try {
         await axios.post('/api/users/set_password/', {
@@ -60,7 +71,6 @@ export const useAuthStore = defineStore('auth', {
           current_password: current_password
         })
       } catch (error) {
-        // console.log('Store:', error.response)
         throw error
       }
     },
