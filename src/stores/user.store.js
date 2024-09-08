@@ -22,7 +22,7 @@ export const useUserStore = defineStore('user', {
         this.name = response.data.name
         return response
       } catch (error) {
-        return error.response
+        throw error
       }
     },
     async registerNewUser(newUser) {
@@ -32,7 +32,7 @@ export const useUserStore = defineStore('user', {
         this.email = response.data.email
         return response
       } catch (error) {
-        return error.response
+        throw error
       }
     },
     async resendActivationEmail(email) {
@@ -40,7 +40,7 @@ export const useUserStore = defineStore('user', {
         const response = await axios.post('/api/users/resend_activation/', { email: email })
         return response
       } catch (error) {
-        return error.response
+        throw error
       }
     },
     async recoverPassword(email) {
@@ -48,7 +48,7 @@ export const useUserStore = defineStore('user', {
         const response = await axios.post('/api/users/reset_password/', { email: email })
         return response
       } catch (error) {
-        return error.response
+        throw error
       }
     }
   }

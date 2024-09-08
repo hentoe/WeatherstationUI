@@ -79,7 +79,7 @@ export const useAuthStore = defineStore('auth', {
         await axios.post('/api/users/logout/')
         this.clearToken()
       } catch (error) {
-        return error.response
+        throw error
       }
     }
   }
