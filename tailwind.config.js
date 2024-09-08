@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {
@@ -12,5 +12,5 @@ module.exports = {
       }
     }
   },
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/aspect-ratio')]
+  plugins: [import('@tailwindcss/forms'), import('@tailwindcss/aspect-ratio')]
 }
