@@ -14,7 +14,7 @@
         </dt>
         <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
           <div class="text-midnight dark:text-ice">English</div>
-          <button type="button" class="font-semibold text-denim dark:text-steel hover:text-ocea">
+          <button type="button" class="font-semibold text-denim dark:text-steel hover:text-ocean">
             Update
           </button>
         </dd>
@@ -25,7 +25,7 @@
         </dt>
         <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
           <div class="text-midnight dark:text-ice">DD-MM-YYYY</div>
-          <button type="button" class="font-semibold text-denim dark:text-steel hover:text-ocea">
+          <button type="button" class="font-semibold text-denim dark:text-steel hover:text-ocean">
             Update
           </button>
         </dd>
