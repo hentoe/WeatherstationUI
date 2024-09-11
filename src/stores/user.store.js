@@ -25,6 +25,19 @@ export const useUserStore = defineStore('user', {
         throw error
       }
     },
+    async updateEmail(newEmail, password) {
+      try {
+        const response = await axios.post('/api/users/set_email/', {
+          new_email: newEmail,
+          current_password: password
+        })
+        if ((response.status = 204)) {
+          this.email = newEmail
+        }
+      } catch (error) {
+        throw error
+      }
+    },
     async registerNewUser(newUser) {
       try {
         const response = await axios.post('/api/users/', newUser)
