@@ -14,14 +14,31 @@
           <div v-if="!showUpdateUser" class="text-midnight dark:text-ice">
             {{ userData.name }}
           </div>
-          <div v-if="showUpdateUser" class="text-midnight dark:text-ice">
-            <input
-              v-model="newName"
-              :placeholder="userData.name"
-              type="text"
-              class="rounded-md bg-ice dark:bg-ocean text-midnight dark:text-ice dark:placeholder:text-stell"
-            />
-          </div>
+          <form v-if="showUpdateUser" class="flex">
+            <div class="text-midnight dark:text-ice flex-col space-y-2">
+              <input
+                v-model="newName"
+                :placeholder="userData.name"
+                type="text"
+                class="rounded-md bg-ice dark:bg-ocean text-midnight dark:text-ice dark:placeholder:text-stell"
+              />
+              <p
+                v-if="nameError.name"
+                v-for="message in nameError.name"
+                class="mt-2 text-sm text-red-600"
+              >
+                {{ message }}
+              </p>
+            </div>
+            <button
+              type="button"
+              class="font-semibold text-denim dark:text-steel hover:text-ocean dark:hover:text-ice"
+              @click="updateUser"
+              v-if="showUpdateUser"
+            >
+              Save
+            </button>
+          </form>
           <button
             type="button"
             class="font-semibold text-denim dark:text-steel hover:text-ocean dark:hover:text-ice"
@@ -30,14 +47,7 @@
           >
             Update
           </button>
-          <button
-            type="button"
-            class="font-semibold text-denim dark:text-steel hover:text-ocean dark:hover:text-ice"
-            @click="updateUser"
-            v-if="showUpdateUser"
-          >
-            Save
-          </button>
+
           <button
             type="button"
             class="font-semibold text-denim dark:text-steel hover:text-ocean dark:hover:text-ice"
@@ -129,13 +139,21 @@ const password = ref('')
 const showUpdateUser = ref(false)
 const showUpdateEmail = ref(false)
 const error = ref({})
+const nameError = ref({})
 
 const toggleUpdateUser = () => {
   showUpdateUser.value = !showUpdateUser.value
 }
-const updateUser = () => {
-  userData.updateUserName(newName.value)
-  showUpdateUser.value = false
+const updateUser = async () => {
+  try {
+    await userData.updateUserName(newName.value)
+    showUpdateUser.value = false
+  } catch (err) {
+    const errorData = err.response.data
+    if (errorData.name) {
+      nameError.value.name = errorData.name
+    }
+  }
 }
 
 const toggleUpdateEmail = () => {
