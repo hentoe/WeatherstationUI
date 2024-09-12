@@ -11,110 +11,114 @@
         <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
           <div class="text-midnight dark:text-ice">
             <p v-if="setPasswordSuccess" class="text-green-500">Password changed successfully.</p>
-            <form @submit.prevent="updatePassword" v-if="showUpdatePassword">
-              <div>
-                <label
-                  for="current_password"
-                  class="block text-sm font-medium leading-6 text-gray-900"
-                  >Current Password</label
-                >
-                <div class="relative mt-2 rounded-md shadow-sm">
-                  <input
-                    type="password"
-                    name="current_password"
-                    id="current_password"
-                    v-model="currentPassword"
-                    class="block w-full ring-1 ring-inset ring-gray-300 rounded-md border-0 py-1.5 pr-10 sm:text-sm sm:leading-6"
-                    :class="{ 'ring-red-500 text-red-900': error.current_password }"
-                    placeholder=""
-                    aria-invalid="error.current_password"
-                  />
-                  <div
-                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+            <form @submit.prevent="updatePassword" v-if="showUpdatePassword" class="flex gap-x-6">
+              <div class="flex-col space-y-2">
+                <div>
+                  <label
+                    for="current_password"
+                    class="block text-sm font-medium leading-6 text-midnight dark:text-steel"
+                    >Current Password</label
+                  >
+                  <div class="relative mt-2 rounded-md shadow-sm">
+                    <input
+                      type="password"
+                      name="current_password"
+                      id="current_password"
+                      v-model="currentPassword"
+                      class="bg-ice dark:bg-ocean text-midnight dark:text-ice block w-full ring-1 ring-inset ring-gray-300 rounded-md border-0 py-1.5 pr-10 sm:text-sm sm:leading-6 dark:placeholder:text-steel"
+                      :class="{ 'ring-red-500 text-red-900': error.current_password }"
+                      placeholder=""
+                      aria-invalid="error.current_password"
+                    />
+                    <div
+                      class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+                      v-if="error.current_password"
+                    >
+                      <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
+                    </div>
+                  </div>
+                  <p
                     v-if="error.current_password"
+                    v-for="message in error.current_password"
+                    class="mt-2 text-sm text-red-600"
                   >
-                    <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
-                  </div>
+                    {{ message }}
+                  </p>
                 </div>
-                <p
-                  v-if="error.current_password"
-                  v-for="message in error.current_password"
-                  class="mt-2 text-sm text-red-600"
-                >
-                  {{ message }}
-                </p>
-              </div>
 
-              <div>
-                <label for="new_password" class="block text-sm font-medium leading-6 text-gray-900"
-                  >New Password</label
-                >
-                <div class="relative mt-2 rounded-md shadow-sm">
-                  <input
-                    type="password"
-                    name="new_password"
-                    id="new_password"
-                    v-model="newPassword"
-                    class="block w-full ring-1 ring-inset ring-gray-300 rounded-md border-0 py-1.5 pr-10 sm:text-sm sm:leading-6"
-                    :class="{ 'ring-red-500 text-red-900': error.new_password }"
-                    placeholder=""
-                    aria-invalid="true"
-                  />
-                  <div
-                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+                <div>
+                  <label
+                    for="new_password"
+                    class="block text-sm font-medium leading-6 text-midnight dark:text-steel"
+                    >New Password</label
+                  >
+                  <div class="relative mt-2 rounded-md shadow-sm">
+                    <input
+                      type="password"
+                      name="new_password"
+                      id="new_password"
+                      v-model="newPassword"
+                      class="bg-ice dark:bg-ocean text-midnight dark:text-ice block w-full ring-1 ring-inset ring-gray-300 rounded-md border-0 py-1.5 pr-10 sm:text-sm sm:leading-6 dark:placeholder:text-steel"
+                      :class="{ 'ring-red-500 text-red-900': error.new_password }"
+                      placeholder=""
+                      aria-invalid="true"
+                    />
+                    <div
+                      class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+                      v-if="error.new_password"
+                    >
+                      <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
+                    </div>
+                  </div>
+                  <p
                     v-if="error.new_password"
+                    v-for="message in error.new_password"
+                    class="mt-2 text-sm text-red-600"
                   >
-                    <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
-                  </div>
+                    {{ message }}
+                  </p>
                 </div>
-                <p
-                  v-if="error.new_password"
-                  v-for="message in error.new_password"
-                  class="mt-2 text-sm text-red-600"
-                >
-                  {{ message }}
-                </p>
-              </div>
 
-              <div>
-                <label
-                  for="re_new_password"
-                  class="block text-sm font-medium leading-6 text-gray-900"
-                  >Confirm New Password</label
-                >
-                <div class="relative mt-2 rounded-md shadow-sm">
-                  <input
-                    type="password"
-                    name="re_new_password"
-                    id="re_new_password"
-                    v-model="reNewPassword"
-                    class="block w-full ring-1 ring-inset ring-gray-300 rounded-md border-0 py-1.5 pr-10 sm:text-sm sm:leading-6"
-                    :class="{ 'ring-red-500 text-red-900': error.re_new_password }"
-                    placeholder=""
-                    aria-invalid="true"
-                    aria-describedby="email-error"
-                  />
-                  <div
-                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
-                    v-if="error.re_new_password"
+                <div>
+                  <label
+                    for="re_new_password"
+                    class="block text-sm font-medium leading-6 text-midnight dark:text-steel"
+                    >Confirm New Password</label
                   >
-                    <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
+                  <div class="relative mt-2 rounded-md shadow-sm">
+                    <input
+                      type="password"
+                      name="re_new_password"
+                      id="re_new_password"
+                      v-model="reNewPassword"
+                      class="bg-ice dark:bg-ocean text-midnight dark:text-ice block w-full ring-1 ring-inset ring-gray-300 rounded-md border-0 py-1.5 pr-10 sm:text-sm sm:leading-6 dark:placeholder:text-steel"
+                      :class="{ 'ring-red-500 text-red-900': error.re_new_password }"
+                      placeholder=""
+                      aria-invalid="true"
+                      aria-describedby="email-error"
+                    />
+                    <div
+                      class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+                      v-if="error.re_new_password"
+                    >
+                      <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
+                    </div>
                   </div>
+                  <p
+                    v-if="error.re_new_password"
+                    v-for="message in error.re_new_password"
+                    class="mt-2 text-sm text-red-600"
+                  >
+                    {{ message }}
+                  </p>
+                  <p
+                    v-if="error.non_field_errors"
+                    v-for="message in error.non_field_errors"
+                    class="mt-2 text-sm text-red-600"
+                  >
+                    {{ message }}
+                  </p>
                 </div>
-                <p
-                  v-if="error.re_new_password"
-                  v-for="message in error.re_new_password"
-                  class="mt-2 text-sm text-red-600"
-                >
-                  {{ message }}
-                </p>
-                <p
-                  v-if="error.non_field_errors"
-                  v-for="message in error.non_field_errors"
-                  class="mt-2 text-sm text-red-600"
-                >
-                  {{ message }}
-                </p>
               </div>
               <button
                 type="submit"

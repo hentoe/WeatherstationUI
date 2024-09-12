@@ -16,13 +16,21 @@
           </div>
           <form v-if="showUpdateUser" class="flex gap-x-6">
             <div class="flex-col space-y-2">
-              <input
-                v-model="newName"
-                placeholder="Enter your name"
-                type="text"
-                class="rounded-md bg-ice dark:bg-ocean text-midnight dark:text-ice dark:placeholder:text-stell"
-                :class="{ 'bg-red-200 text-red-900': nameError.name }"
-              />
+              <div class="relative mt-2 rounded-md shadow-sm">
+                <input
+                  v-model="newName"
+                  placeholder="Enter your name"
+                  type="text"
+                  class="bg-ice dark:bg-ocean text-midnight dark:text-ice block w-full ring-1 ring-inset ring-gray-300 rounded-md border-0 py-1.5 pr-10 sm:text-sm sm:leading-6 dark:placeholder:text-steel"
+                  :class="{ 'ring-red-500 text-red-900': nameError.name }"
+                />
+                <div
+                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+                  v-if="nameError.name"
+                >
+                  <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
+                </div>
+              </div>
               <p
                 v-if="nameError.name"
                 v-for="message in nameError.name"
@@ -67,14 +75,22 @@
           <form @submit.prevent="updateEmail" v-if="showUpdateEmail" class="flex gap-x-6">
             <div class="flex-col space-y-2">
               <div>
-                <input
-                  type="email"
-                  class="rounded-md bg-ice dark:bg-ocean text-midnight dark:text-ice dark:placeholder:text-stell"
-                  :class="{ 'bg-red-200 text-red-900': emailError.new_email }"
-                  v-model="newEmail"
-                  placeholder="Enter new email"
-                  autocomplete="email"
-                />
+                <div class="relative mt-2 rounded-md shadow-sm">
+                  <input
+                    type="email"
+                    class="bg-ice dark:bg-ocean text-midnight dark:text-ice block w-full ring-1 ring-inset ring-gray-300 rounded-md border-0 py-1.5 pr-10 sm:text-sm sm:leading-6 dark:placeholder:text-steel"
+                    :class="{ 'ring-red-500 text-red-900': emailError.new_email }"
+                    v-model="newEmail"
+                    placeholder="Enter new email"
+                    autocomplete="email"
+                  />
+                  <div
+                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+                    v-if="emailError.new_email"
+                  >
+                    <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
+                  </div>
+                </div>
                 <p
                   v-if="emailError.new_email"
                   v-for="message in emailError.new_email"
@@ -84,13 +100,24 @@
                 </p>
               </div>
               <div>
-                <input
-                  type="password"
-                  class="rounded-md bg-ice dark:bg-ocean text-midnight dark:text-ice dark:placeholder:text-stell"
-                  :class="{ 'bg-red-200 text-red-900': emailError.current_password }"
-                  placeholder="Enter password"
-                  v-model="password"
-                />
+                <div class="relative mt-2 rounded-md shadow-sm">
+                  <input
+                    type="password"
+                    name="current_password"
+                    id="current_password"
+                    v-model="currentPassword"
+                    class="bg-ice dark:bg-ocean text-midnight dark:text-ice block w-full ring-1 ring-inset ring-gray-300 rounded-md border-0 py-1.5 pr-10 sm:text-sm sm:leading-6 dark:placeholder:text-steel"
+                    :class="{ 'ring-red-500 text-red-900': emailError.current_password }"
+                    placeholder="Enter your password"
+                    aria-invalid="error.current_password"
+                  />
+                  <div
+                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+                    v-if="emailError.current_password"
+                  >
+                    <ExclamationCircleIcon class="h-5 w-5 text-red-500" aria-hidden="true" />
+                  </div>
+                </div>
                 <p
                   v-if="emailError.current_password"
                   v-for="message in emailError.current_password"
@@ -136,6 +163,9 @@
 <script setup>
 import { ref } from 'vue'
 import { useUserStore } from '../stores/user.store'
+
+import { ExclamationCircleIcon } from '@heroicons/vue/20/solid'
+
 const userData = useUserStore()
 
 const newName = ref(userData.name)
