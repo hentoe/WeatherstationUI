@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full max-w-sm bg-white border border-gray-200 rounded-lg hover:opacity-75 shadow dark:bg-ocean dark:border-none m-4"
+    class="w-full max-w-sm bg-white border border-gray-200 rounded-lg hover:opacity-75 shadow-sm dark:bg-ocean dark:border-none m-4"
   >
     <div class="flex justify-end px-4 pt-4">
       <!-- Upper right corner -->

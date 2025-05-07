@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="bg-ice dark:bg-midnight shadow">
+    <header class="bg-ice dark:bg-midnight shadow-sm">
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <h1 class="text-3xl font-bold tracking-tight text-midnight dark:text-ice">Locations</h1>
       </div>
@@ -11,7 +11,7 @@
         <input
           v-model="newLocationName"
           type="text"
-          class="flex-1 py-3 px-2 rounded-l-md focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-ocean text-midnight dark:text-ice dark:placeholder:text-steel"
+          class="flex-1 py-3 px-2 rounded-l-md focus:ring-blue-200 focus:outline-hidden focus:border-blue-300 bg-ice dark:bg-ocean text-midnight dark:text-ice dark:placeholder:text-steel"
           placeholder="New Location"
         />
         <button
@@ -29,7 +29,7 @@
           <Switch
             v-model="enabled"
             :class="enabled ? 'bg-gray-300' : 'bg-gray-500'"
-            class="relative inline-flex h-6 w-10 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+            class="relative inline-flex h-6 w-10 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white/75"
           >
             <span class="sr-only">Show assigned locations only</span>
             <span

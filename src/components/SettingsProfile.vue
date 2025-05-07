@@ -16,7 +16,7 @@
           </div>
           <form v-if="showUpdateUser" class="flex gap-x-6">
             <div class="flex-col space-y-2">
-              <div class="relative mt-2 rounded-md shadow-sm">
+              <div class="relative mt-2 rounded-md shadow-xs">
                 <input
                   v-model="newName"
                   placeholder="Enter your name"
@@ -75,7 +75,7 @@
           <form @submit.prevent="updateEmail" v-if="showUpdateEmail" class="flex gap-x-6">
             <div class="flex-col space-y-2">
               <div>
-                <div class="relative mt-2 rounded-md shadow-sm">
+                <div class="relative mt-2 rounded-md shadow-xs">
                   <input
                     type="email"
                     class="bg-ice dark:bg-ocean text-midnight dark:text-ice block w-full ring-1 ring-inset ring-gray-300 rounded-md border-0 py-1.5 pr-10 sm:text-sm sm:leading-6 dark:placeholder:text-steel"
@@ -100,7 +100,7 @@
                 </p>
               </div>
               <div>
-                <div class="relative mt-2 rounded-md shadow-sm">
+                <div class="relative mt-2 rounded-md shadow-xs">
                   <input
                     type="password"
                     name="current_password"
