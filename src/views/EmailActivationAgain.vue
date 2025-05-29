@@ -23,7 +23,7 @@
               autocomplete="email"
               required
               v-model="email"
-              class="block w-full rounded-md border-0 py-1.5 text-midnight shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              class="block w-full rounded-md border-0 py-1.5 text-midnight shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
         </div>
@@ -31,7 +31,7 @@
         <div>
           <button
             type="submit"
-            class="flex w-full justify-center rounded-md bg-denim px-3 py-1.5 text-sm font-semibold leading-6 text-ice shadow-sm hover:bg-ocean focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-denim"
+            class="flex w-full justify-center rounded-md bg-denim px-3 py-1.5 text-sm font-semibold leading-6 text-ice shadow-xs hover:bg-ocean focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-denim"
           >
             Send Email
           </button>

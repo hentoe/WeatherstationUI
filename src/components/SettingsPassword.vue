@@ -19,7 +19,7 @@
                     class="block text-sm font-medium leading-6 text-midnight dark:text-steel"
                     >Current Password</label
                   >
-                  <div class="relative mt-2 rounded-md shadow-sm">
+                  <div class="relative mt-2 rounded-md shadow-xs">
                     <input
                       type="password"
                       name="current_password"
@@ -52,7 +52,7 @@
                     class="block text-sm font-medium leading-6 text-midnight dark:text-steel"
                     >New Password</label
                   >
-                  <div class="relative mt-2 rounded-md shadow-sm">
+                  <div class="relative mt-2 rounded-md shadow-xs">
                     <input
                       type="password"
                       name="new_password"
@@ -85,7 +85,7 @@
                     class="block text-sm font-medium leading-6 text-midnight dark:text-steel"
                     >Confirm New Password</label
                   >
-                  <div class="relative mt-2 rounded-md shadow-sm">
+                  <div class="relative mt-2 rounded-md shadow-xs">
                     <input
                       type="password"
                       name="re_new_password"

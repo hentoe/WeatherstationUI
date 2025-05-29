@@ -32,7 +32,7 @@
               <div class="bg-ice dark:bg-midnight px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start">
                   <div
-                    class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-yellow-100 sm:mx-0 sm:h-10 sm:w-10"
+                    class="mx-auto flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-yellow-100 sm:mx-0 sm:h-10 sm:w-10"
                   >
                     <Cog6ToothIcon class="h-6 w-6 text-yellow-500" aria-hidden="true" />
                   </div>
@@ -52,7 +52,7 @@
                             id="password"
                             placeholder="Enter your Password"
                             name="password"
-                            class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300"
+                            class="mt-1 p-2 w-full border rounded-md shadow-xs focus:ring-3 focus:ring-blue-200 focus:outline-hidden focus:border-blue-300"
                           />
                         </div>
                       </form>
@@ -61,7 +61,7 @@
                         disabled
                         v-model="api_key"
                         id="api_key"
-                        class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300"
+                        class="mt-1 p-2 w-full border rounded-md shadow-xs focus:ring-3 focus:ring-blue-200 focus:outline-hidden focus:border-blue-300"
                       />
                       <p
                         v-if="error.password"
@@ -85,14 +85,14 @@
                 <button
                   v-if="!api_key"
                   type="button"
-                  class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
+                  class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-green-500 sm:ml-3 sm:w-auto"
                   @click="handleKey"
                 >
                   Show API-Key
                 </button>
                 <button
                   type="button"
-                  class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                  class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                   @click="closeModal"
                   ref="cancelButtonRef"
                 >

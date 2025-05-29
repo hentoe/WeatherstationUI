@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-ice dark:bg-midnight shadow">
+  <header class="bg-ice dark:bg-midnight shadow-sm">
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <h1 class="text-3xl font-bold tracking-tight text-midnight dark:text-ice">Add Sensor</h1>
     </div>
@@ -11,7 +11,7 @@
         <input
           v-model="newSensorName"
           type="text"
-          class="mt-1 p-2 w-full border rounded-md focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-steel"
+          class="mt-1 p-2 w-full border rounded-md focus:ring-blue-200 focus:outline-hidden focus:border-blue-300 bg-ice dark:bg-steel"
         />
       </div>
       <div class="mb-4 text-midnight dark:text-ice">
@@ -20,7 +20,7 @@
           v-model="newSensorLocation"
           id="sensorLocation"
           name="location"
-          class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-steel"
+          class="mt-1 p-2 w-full border rounded-md shadow-xs focus:ring-3 focus:ring-blue-200 focus:outline-hidden focus:border-blue-300 bg-ice dark:bg-steel"
         >
           <option disabled value="">Please select a location</option>
           <option
@@ -39,7 +39,7 @@
           v-model="newSensorType"
           id="sensorType"
           name="sensortype"
-          class="mt-1 p-2 w-full border rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-steel"
+          class="mt-1 p-2 w-full border rounded-md shadow-xs focus:ring-3 focus:ring-blue-200 focus:outline-hidden focus:border-blue-300 bg-ice dark:bg-steel"
         >
           <option disabled value="">Please select a sensor type</option>
           <option
@@ -57,7 +57,7 @@
         <textarea
           v-model="newSensorDescription"
           type="text"
-          class="mt-1 p-2 w-full border rounded-md text-midnight dark:text-ice focus:ring-blue-200 focus:outline-none focus:border-blue-300 bg-ice dark:bg-steel"
+          class="mt-1 p-2 w-full border rounded-md text-midnight dark:text-ice focus:ring-blue-200 focus:outline-hidden focus:border-blue-300 bg-ice dark:bg-steel"
           placeholder="optional"
         >
         </textarea>
