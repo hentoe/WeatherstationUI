@@ -4,7 +4,8 @@ import axios from 'axios'
 export const useUserStore = defineStore('user', {
   state: () => ({
     name: '',
-    email: ''
+    email: '',
+    is_staff: ''
   }),
   actions: {
     async fetchUserData() {
@@ -12,6 +13,7 @@ export const useUserStore = defineStore('user', {
         const response = await axios.get('/api/users/me/')
         this.name = response.data.name
         this.email = response.data.email
+        this.is_staff = response.data.is_staff
       } catch (error) {
         console.error('Error fetching user data:', error)
       }

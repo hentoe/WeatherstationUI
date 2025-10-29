@@ -158,6 +158,16 @@ c200 -110 334 -292 387 -525 3 -16 8 -78 9 -136 7 -269 -120 -509 -348 -659
                       >Settings</RouterLink
                     >
                   </MenuItem>
+                  <MenuItem v-if="userStore.is_staff" v-slot="{ active }">
+                    <a
+                      :href="`${baseURL}/admin/`"
+                      :class="[
+                        active ? 'bg-steel dark:bg-ocean dark:hover:bg-denim' : '',
+                        'block px-4 py-2 text-sm text-midnight dark:text-ice'
+                      ]"
+                      >Admin Panel</a
+                    >
+                  </MenuItem>
                   <MenuItem v-slot="{ active }">
                     <a
                       href="#"
@@ -199,6 +209,7 @@ c200 -110 334 -292 387 -525 3 -16 8 -78 9 -136 7 -269 -120 -509 -348 -659
 
 <script setup>
 import { onMounted } from 'vue'
+import axios from 'axios'
 import {
   Disclosure,
   DisclosureButton,
@@ -225,6 +236,8 @@ const router = useRouter()
 
 const userStore = useUserStore()
 const weatherstationStore = useWeatherstationStore()
+
+const baseURL = axios.defaults.baseURL
 
 onMounted(async () => {
   await userStore.fetchUserData()
