@@ -38,8 +38,8 @@
                     </div>
                   </div>
                   <p
-                    v-if="error.current_password"
-                    v-for="message in error.current_password"
+                    v-for="message in error.current_password || []"
+                    :key="message"
                     class="mt-2 text-sm text-red-600"
                   >
                     {{ message }}
@@ -71,8 +71,8 @@
                     </div>
                   </div>
                   <p
-                    v-if="error.new_password"
-                    v-for="message in error.new_password"
+                    v-for="message in error.new_password || []"
+                    :key="message"
                     class="mt-2 text-sm text-red-600"
                   >
                     {{ message }}
@@ -105,15 +105,15 @@
                     </div>
                   </div>
                   <p
-                    v-if="error.re_new_password"
-                    v-for="message in error.re_new_password"
+                    v-for="message in error.re_new_password || []"
+                    :key="message"
                     class="mt-2 text-sm text-red-600"
                   >
                     {{ message }}
                   </p>
                   <p
-                    v-if="error.non_field_errors"
-                    v-for="message in error.non_field_errors"
+                    v-for="message in error.non_field_errors || []"
+                    :key="message"
                     class="mt-2 text-sm text-red-600"
                   >
                     {{ message }}

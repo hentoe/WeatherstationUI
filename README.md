@@ -1,20 +1,25 @@
 # WetterstationUI
 
-This template should help get you started developing with Vue 3 in Vite.
+Vue-3-Oberfläche zur Verwaltung von Wetterstationen, Standorten, Sensoren und Messwerten.
 
-## Recommended IDE Setup
+## Voraussetzungen
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- Node.js 22 oder neuer
+- Eine laufende Wetterstation-API
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## Einrichtung
 
 ```sh
 npm install
 ```
+
+Optional kann die API-Adresse über eine lokale `.env.local` gesetzt werden:
+
+```sh
+VITE_API_BASE_URL=https://api.example.com
+```
+
+Ohne diese Variable wird für die lokale Entwicklung `http://127.0.0.1:8000` verwendet.
 
 ### Compile and Hot-Reload for Development
 
@@ -28,8 +33,12 @@ npm run dev
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### Qualität prüfen
 
 ```sh
 npm run lint
+npm run test
+npm run build
 ```
+
+`npm run lint:fix` korrigiert automatisch behebbaren Stilcode. `npm run format` formatiert die Dateien unter `src/` mit Prettier.

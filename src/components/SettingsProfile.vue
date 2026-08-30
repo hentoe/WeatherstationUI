@@ -32,8 +32,8 @@
                 </div>
               </div>
               <p
-                v-if="nameError.name"
-                v-for="message in nameError.name"
+                v-for="message in nameError.name || []"
+                :key="message"
                 class="mt-2 text-sm text-red-600"
               >
                 {{ message }}
@@ -92,8 +92,8 @@
                   </div>
                 </div>
                 <p
-                  v-if="emailError.new_email"
-                  v-for="message in emailError.new_email"
+                  v-for="message in emailError.new_email || []"
+                  :key="message"
                   class="text-sm text-red-600"
                 >
                   {{ message }}
@@ -119,8 +119,8 @@
                   </div>
                 </div>
                 <p
-                  v-if="emailError.current_password"
-                  v-for="message in emailError.current_password"
+                  v-for="message in emailError.current_password || []"
+                  :key="message"
                   class="text-sm text-red-600"
                 >
                   {{ message }}

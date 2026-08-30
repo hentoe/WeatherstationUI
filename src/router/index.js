@@ -75,7 +75,7 @@ const router = createRouter({
       children: [
         {
           path: '',
-          redirect: 'settings/general'
+          redirect: '/settings/general'
         },
         {
           path: 'general',
