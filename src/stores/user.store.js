@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import axios from 'axios'
+import api from '@/services/api'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -10,17 +10,15 @@ export const useUserStore = defineStore('user', {
   actions: {
     async fetchUserData() {
       try {
-        const response = await axios.get('/api/users/me/')
+        const response = await api.get('/api/users/me/')
         this.name = response.data.name
         this.email = response.data.email
         this.is_staff = response.data.is_staff
-      } catch (error) {
-        console.error('Error fetching user data:', error)
-      }
+      } catch (error) { throw error }
     },
     async updateUserName(newName) {
       try {
-        const response = await axios.patch('/api/users/me/', { name: newName })
+        const response = await api.patch('/api/users/me/', { name: newName })
         this.name = response.data.name
         return response
       } catch (error) {
@@ -29,20 +27,21 @@ export const useUserStore = defineStore('user', {
     },
     async updateEmail(newEmail, password) {
       try {
-        const response = await axios.post('/api/users/set_email/', {
+        const response = await api.post('/api/users/set_email/', {
           new_email: newEmail,
           current_password: password
         })
-        if ((response.status = 204)) {
+        if (response.status === 204) {
           this.email = newEmail
         }
+        return response
       } catch (error) {
         throw error
       }
     },
     async registerNewUser(newUser) {
       try {
-        const response = await axios.post('/api/users/', newUser)
+        const response = await api.post('/api/users/', newUser)
         this.name = response.data.name
         this.email = response.data.email
         return response
@@ -52,7 +51,7 @@ export const useUserStore = defineStore('user', {
     },
     async resendActivationEmail(email) {
       try {
-        const response = await axios.post('/api/users/resend_activation/', { email: email })
+        const response = await api.post('/api/users/resend_activation/', { email: email })
         return response
       } catch (error) {
         throw error
@@ -60,7 +59,7 @@ export const useUserStore = defineStore('user', {
     },
     async recoverPassword(email) {
       try {
-        const response = await axios.post('/api/users/reset_password/', { email: email })
+        const response = await api.post('/api/users/reset_password/', { email: email })
         return response
       } catch (error) {
         throw error

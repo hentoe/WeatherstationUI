@@ -84,7 +84,7 @@
 
 <script>
 import { useAuthStore } from '../stores/auth.store'
-import axios from 'axios'
+import api from '@/services/api'
 
 import { ExclamationCircleIcon } from '@heroicons/vue/24/outline'
 
@@ -101,7 +101,7 @@ export default {
   methods: {
     async login() {
       try {
-        const response = await axios.post('/api/users/login/', {
+        const response = await api.post('/api/users/login/', {
           email: this.email,
           password: this.password
         })
@@ -112,8 +112,10 @@ export default {
 
         this.$router.push('/')
       } catch (error) {
-        this.errorMessage = error.response.data.non_field_errors[0]
-        this.toggleErrorMessage()
+        this.errorMessage =
+          error.response?.data?.non_field_errors?.[0] ||
+          'Unable to sign in. Please try again.'
+        this.errorMessageActive = true
       }
     },
     toggleErrorMessage() {

@@ -64,15 +64,15 @@
                         class="mt-1 p-2 w-full border rounded-md shadow-xs focus:ring-3 focus:ring-blue-200 focus:outline-hidden focus:border-blue-300"
                       />
                       <p
-                        v-if="error.password"
-                        v-for="message in error.password"
+                        v-for="message in error.password || []"
+                        :key="message"
                         class="mt-2 text-sm text-red-600"
                       >
                         {{ message }}
                       </p>
                       <p
-                        v-if="error.non_field_errors"
-                        v-for="message in error.non_field_errors"
+                        v-for="message in error.non_field_errors || []"
+                        :key="message"
                         class="mt-2 text-sm text-red-600"
                       >
                         {{ message }}
@@ -139,7 +139,6 @@ const handleKey = async () => {
   try {
     const response = await authStore.getApiKey(userStore.email, password.value)
     api_key.value = response.data.token
-    console.log(api_key.value)
   } catch (err) {
     if (err.response && err.response.data) {
       const errorData = err.response.data
@@ -150,7 +149,6 @@ const handleKey = async () => {
         error.value.password = errorData.password
       }
     } else {
-      console.error('Error', err)
       error.value.non_field_errors = ['An unexpected error occurred.']
     }
   }

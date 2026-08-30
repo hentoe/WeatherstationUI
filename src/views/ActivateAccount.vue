@@ -19,7 +19,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import axios from 'axios'
+import api from '@/services/api'
 
 const route = useRoute()
 const activationStatus = ref('')
@@ -33,7 +33,7 @@ async function activateAccount() {
   const token = route.query.token
 
   try {
-    await axios.post('/api/users/activation/', { uid, token })
+    await api.post('/api/users/activation/', { uid, token })
     activationStatus.value = 'success'
   } catch (error) {
     activationStatus.value = 'error'

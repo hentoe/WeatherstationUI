@@ -71,7 +71,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import axios from 'axios'
+import api from '@/services/api'
 
 import { ExclamationCircleIcon } from '@heroicons/vue/24/outline'
 
@@ -101,7 +101,7 @@ async function resetPassword() {
   }
 
   try {
-    await axios.post('/api/users/reset_password_confirm/', payload.value)
+    await api.post('/api/users/reset_password_confirm/', payload.value)
     activationStatus.value = 'success'
   } catch (error) {
     activationStatus.value = 'error'
