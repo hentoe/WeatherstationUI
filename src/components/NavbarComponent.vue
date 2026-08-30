@@ -209,7 +209,7 @@ c200 -110 334 -292 387 -525 3 -16 8 -78 9 -136 7 -269 -120 -509 -348 -659
 
 <script setup>
 import { onMounted } from 'vue'
-import axios from 'axios'
+import api from '@/services/api'
 import {
   Disclosure,
   DisclosureButton,
@@ -237,7 +237,7 @@ const router = useRouter()
 const userStore = useUserStore()
 const weatherstationStore = useWeatherstationStore()
 
-const baseURL = axios.defaults.baseURL
+const baseURL = api.defaults.baseURL
 
 onMounted(async () => {
   await userStore.fetchUserData()
@@ -248,7 +248,11 @@ onMounted(async () => {
 
 const handleSignOut = async () => {
   const authStore = useAuthStore()
-  await authStore.logout()
-  router.push({ name: 'login' })
+  try {
+    await authStore.logout()
+  } finally {
+    authStore.clearToken()
+    router.push({ name: 'login' })
+  }
 }
 </script>

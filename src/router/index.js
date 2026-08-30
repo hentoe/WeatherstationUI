@@ -68,6 +68,9 @@ const router = createRouter({
     },
     {
       path: '/settings',
+      meta: {
+        requireLogin: true
+      },
       component: () => import('../views/SettingsPage.vue'),
       children: [
         {

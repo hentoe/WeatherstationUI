@@ -1,86 +1,63 @@
-import { defineStore, getActivePinia } from 'pinia'
-import axios from 'axios'
+import { defineStore } from 'pinia'
+import api from '@/services/api'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    token: localStorage.getItem('token'),
-    expiry: localStorage.getItem('expiry'),
-    isAuthenticated: false
+    token: localStorage.getItem('token') || '',
+    expiry: localStorage.getItem('expiry') || ''
   }),
+  getters: {
+    isAuthenticated: (state) => {
+      const expiryTimestamp = new Date(state.expiry).getTime()
+      return Boolean(state.token && Number.isFinite(expiryTimestamp) && expiryTimestamp > Date.now())
+    }
+  },
   actions: {
-    beforeCreate() {
-      const storedToken = localStorage.getItem('token')
-      const storedExpiry = localStorage.getItem('expiry')
-      this.token = storedToken || ''
-      this.expiry = storedExpiry || ''
-      this.isAuthenticated = !!storedToken
-      if (!this.isTokenValid()) {
+    initialize() {
+      if (this.token && !this.isAuthenticated) {
         this.clearToken()
       }
     },
     setToken(token, expiry) {
-      if (token) {
+      const expiryTimestamp = new Date(expiry).getTime()
+
+      if (token && Number.isFinite(expiryTimestamp) && expiryTimestamp > Date.now()) {
         this.token = token
         this.expiry = expiry
-        this.isAuthenticated = true
         localStorage.setItem('token', token)
         localStorage.setItem('expiry', expiry)
       } else {
-        this.token = ''
-        this.expiry = ''
-        this.isAuthenticated = false
-        localStorage.removeItem('token')
-        localStorage.removeItem('expiry')
+        this.clearToken()
       }
     },
     clearToken() {
       this.token = ''
       this.expiry = ''
-      this.isAuthenticated = false
       localStorage.removeItem('token')
       localStorage.removeItem('expiry')
-      getActivePinia()._s.forEach((store) => store.$reset())
-    },
-    isTokenValid() {
-      if (this.isAuthenticated && this.expiry) {
-        const currentTimestamp = Date.now() // Get current timestamp in milliseconds
-        const expiryTimestamp = new Date(this.expiry).getTime()
-
-        // Check if the token expiry is in the future
-        return expiryTimestamp > currentTimestamp
-      }
-
-      return false
     },
     async getApiKey(email, password) {
       try {
-        const response = await axios.post('/api/users/token/', {
+        return await api.post('/api/users/token/', {
           email: email,
           password: password
         })
-        return response
-      } catch (error) {
-        throw error
-      }
+      } catch (error) { throw error }
     },
     async setPassword(current_password, new_password, re_new_password) {
       try {
-        await axios.post('/api/users/set_password/', {
+        await api.post('/api/users/set_password/', {
           new_password: new_password,
           re_new_password: re_new_password,
           current_password: current_password
         })
-      } catch (error) {
-        throw error
-      }
+      } catch (error) { throw error }
     },
     async logout() {
       try {
-        await axios.post('/api/users/logout/')
+        await api.post('/api/users/logout/')
         this.clearToken()
-      } catch (error) {
-        throw error
-      }
+      } catch (error) { throw error }
     }
   }
 })
