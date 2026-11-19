@@ -28,12 +28,11 @@
     "@vue/eslint-config-prettier": "^10.2.0",
     "eslint": "^9.27.0",
     "eslint-plugin-vue": "^10.11.1",
+    "jsdom": "^28.1.0",
     "postcss": "^8.5.25",
     "prettier": "^3.5.3",
     "tailwindcss": "^4.1.8",
     "vite": "^8.3.4",
-    "vitest": "^4.1.12",
-    "@vue/test-utils": "^2.4.6",
-    "jsdom": "^28.1.0"
+    "vitest": "^4.1.12"
   }
 }
